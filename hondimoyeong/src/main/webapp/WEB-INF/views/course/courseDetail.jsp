@@ -101,7 +101,6 @@
 	<jsp:include page="../common/header.jsp"/>
 	
 	 <div id="innerOuter">
-	 
 	 	<div id="choose-area">
 	        <form action="course" method="get">
 	            <select id="choose" name="courseIndex">

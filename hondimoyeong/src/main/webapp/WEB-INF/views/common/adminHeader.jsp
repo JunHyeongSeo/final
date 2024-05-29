@@ -18,7 +18,7 @@
 
         #header{
             width: 1200px;
-            height: 260px;
+            height: 180px;
             margin : auto;
             margin-top : 30px;
         }

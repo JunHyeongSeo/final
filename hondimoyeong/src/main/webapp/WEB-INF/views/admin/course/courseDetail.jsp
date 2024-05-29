@@ -17,7 +17,7 @@
 
         #innerOuter{
             width: 1000px;
-            height: 800px;
+            height: 1300px;
             margin: auto;
         }
 
@@ -33,7 +33,6 @@
         }
 
         table{
-            border : 1px solid red;
             margin: auto;
             margin-top : 20px;
         }
@@ -66,6 +65,7 @@
             text-align: center;
             margin : 30px
         }
+        
         button{
             background-color: #ff9843;
             border : none;
@@ -86,7 +86,7 @@
     
     <div id="innerOuter">
 
-        <h2>관리자페이지/ 올레길</h2>
+        <h2>올레길 / 코스 상세보기</h2>
         <div id="line"></div>
 
         <table>
