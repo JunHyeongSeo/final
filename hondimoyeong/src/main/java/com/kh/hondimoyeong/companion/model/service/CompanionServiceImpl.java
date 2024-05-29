@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 
 import com.kh.hondimoyeong.common.model.vo.PageInfo;
 import com.kh.hondimoyeong.companion.model.dao.CompanionMapper;
-import com.kh.hondimoyeong.companion.model.dao.CompanionRepository;
 import com.kh.hondimoyeong.companion.model.vo.Companion;
 import com.kh.hondimoyeong.companion.model.vo.CompanionReply;
 import com.kh.hondimoyeong.course.model.vo.Course;
@@ -36,7 +35,7 @@ public class CompanionServiceImpl implements CompanionService {
 		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
 		return companionMapper.selectAll(rowBounds);
 	}
-
+	
 	@Override
 	public List<Companion> sortCompanions() {
 		return companionMapper.sortCompanions();
@@ -51,14 +50,14 @@ public class CompanionServiceImpl implements CompanionService {
 	public List<Companion> sortCompanion(PageInfo pi) {
 		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
 		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
-		return companionMapper.sort(rowBounds);
+		return companionMapper.sortCompanions(rowBounds);
 	}
 
 	@Override
 	public List<Companion> sort(PageInfo pi) {
 		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
 		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
-		return companionMapper.sort(rowBounds);
+		return companionMapper.sortCompanions(rowBounds);
 	}
 
 	@Override

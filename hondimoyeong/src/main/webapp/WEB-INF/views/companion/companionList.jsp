@@ -93,13 +93,28 @@
 
     .hdmy-board_top-align a{
         font-size: 15px;
-        font-weight: bold;
         text-decoration: none;
+    }
+    
+    .sortCompanionList, .sortCompanion{
+        font-weight: bold;
+    }
+    
+    .sortCompanionList:hover, .sortCompanion:hover{
+        color: #FF9843;
     }
 
     .hdmy-board_top-align a:hover{
-        color: #FF9843;
         text-decoration: none;
+    }
+    
+    .sortCompanionInfo{
+    	color: #777777;
+    	margin-left : 10px;
+    }
+    
+    .sortCompanionInfo:hover{
+    	color: #777777;
     }
     
     .sortCompanionList{
@@ -258,6 +273,7 @@
                 <div class="hdmy-board_top-align">
                 	<a class="sortCompanionList" href="companion">전체</a> | 
 					<a class="sortCompanion" href="sort.cmp">모집중</a> 
+					<a class="sortCompanionInfo"> (* 기본 날짜순 정렬) </a>
                 </div>
                 
                 <c:if test="${ !empty loginUser }">

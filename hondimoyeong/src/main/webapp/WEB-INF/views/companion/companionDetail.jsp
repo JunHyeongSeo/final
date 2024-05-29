@@ -114,10 +114,12 @@
         /* border-bottom: 1px solid lightgray; */
     }
 
-    .detail_content_p{
-        padding-top: 20px;
-        padding-bottom: 20px;
-    }
+	.detail_content_p{
+		width: 1200px;
+	    padding-top: 20px;
+	    padding-bottom: 20px;
+	    white-space:pre-line;
+	}
 
     /* 댓글 */
     .detail_reply_title{
@@ -293,7 +295,7 @@
         </div>
 
         <div class="detail_content">
-            <p class="detail_content_p">${companion.companionContent}</p>
+            <div class="detail_content_p">${companion.companionContent}</div>
         </div>
 
         <div class="detail_reply_title">
@@ -365,7 +367,11 @@
 			$('#postForm').attr('action', 'updateForm.cmp').submit();
 		}
 		else{
-			$('#postForm').attr('action', 'delete.cmp').submit();
+	        let dele = confirm('삭제 하시겠습니까?');
+	        if(dele){
+	        	$('#postForm').attr('action', 'delete.cmp').submit();
+	        }
+			
 		}
 	}
 	

@@ -107,7 +107,7 @@ public class CompanionController {
 		}
 	}
 	
-	@GetMapping("delete.cmp")
+	@PostMapping("delete.cmp")
 	public String delete(@ModelAttribute Companion companion, int companionNo, HttpSession session) {
 		if(companionService.delete(companionNo) > 0) {
 			session.setAttribute("alertMsg", "모집글이 삭제되었습니다.");
