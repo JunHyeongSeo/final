@@ -229,6 +229,23 @@
             #pagingArea{
             	margin-top : 20px;
             }
+            
+            #pageChange{
+            	width : 250px;
+            	height : 30px;
+            	text-align : center;
+            	float : right;
+            	background-color : #FF9843;
+            	border-top-right-radius : 10px;
+            }
+            
+            #pageChange > a {
+            	text-decoration : none;
+            	color : white;
+            	font-size : 16px;
+            }
+            
+            
 
 
     </style>    
@@ -236,10 +253,11 @@
 <body>
     <jsp:include page="../common/header.jsp"/>
     <div id="wrap">
-    
+    			
+
         <div id="content">
+        	<div id="pageChange"><a href="myRequest?page="> 나의 신청내역 보기 </a> </div>
             <img class="icon-Img" src="resources/image/mypageIcon.png">
-			<a href="myRequest?page="> 나의 신청내역 보기 </a>
 			
             <div id="titleBox">내가 쓴 동행 게시글</div>
             <div class="detailBox">

@@ -59,7 +59,6 @@
                 line-height: 50px;
                 font-size: 20px;
                 font-weight: bold;
-
             }
 
 
@@ -217,6 +216,22 @@
                 color: #FFFFFF !important;
                 border-radius: 10px;
             }
+            
+            #pageChange{
+            	width : 250px;
+            	height : 30px;
+            	text-align : center;
+            	float : right;
+            	background-color : #FF9843;
+            	border-top-right-radius : 10px;
+            }
+            
+            #pageChange > a {
+            	text-decoration : none;
+            	color : white;
+            	font-size : 16px;
+            }
+            
 
     </style>    
 </head>
@@ -225,9 +240,8 @@
     <div id="wrap">
     
         <div id="content">
-            <img class="icon-Img" src="resources/image/mypageIcon.png">
-			<a href="companionInvite?page="> 내가 쓴 동행 게시글 보기 </a>
-			
+        	<div id="pageChange"><a href="companionInvite?page="> 내가 쓴 동행 게시글 보기 </a></div>
+            <img class="icon-Img" src="resources/image/mypageIcon.png">	
             <div id="titleBox">나의 신청 내역</div>
             <div class="detailBox">
             
