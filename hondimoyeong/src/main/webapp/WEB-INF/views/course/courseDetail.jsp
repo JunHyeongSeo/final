@@ -86,7 +86,11 @@
         	heigth : 500px;
         	display : inline-block;
         	margin-left :50px;
-        	
+        }
+        
+        #map-info {
+        	text-align : center;
+        	border : none;
         }
 
 

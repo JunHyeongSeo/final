@@ -17,11 +17,9 @@ public interface CompanionMapper {
 
 	List<Companion> selectAll(RowBounds rowBounds);
 
-	List<Companion> sortCompanions();
-
 	int sortCompanionCount();
 
-	List<Companion> sort(RowBounds rowBounds);
+	List<Companion> sortCompanions(RowBounds rowBounds);
 
 	int increaseCount(int companionNo);
 
@@ -44,5 +42,7 @@ public interface CompanionMapper {
 	List<CompanionReply> selectReply(int companionNo);
 
 	int insertReply(CompanionReply companionReply);
+
+	List<Companion> sortCompanions();
 
 }

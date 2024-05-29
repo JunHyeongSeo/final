@@ -147,7 +147,7 @@
             	cursor : pointer;
             }
             
-           .box4 {
+           .box5 {
 	            width: 400px;
 	            height: 100px;
 	            border-radius: 10px;
@@ -225,6 +225,27 @@
             .page-item:last-child .page-link, .page-item:first-child .page-link {
                 border-radius: 10px !important;
             }
+            
+            #pagingArea{
+            	margin-top : 20px;
+            }
+            
+            #pageChange{
+            	width : 250px;
+            	height : 30px;
+            	text-align : center;
+            	float : right;
+            	background-color : #FF9843;
+            	border-top-right-radius : 10px;
+            }
+            
+            #pageChange > a {
+            	text-decoration : none;
+            	color : white;
+            	font-size : 16px;
+            }
+            
+            
 
 
     </style>    
@@ -232,10 +253,11 @@
 <body>
     <jsp:include page="../common/header.jsp"/>
     <div id="wrap">
-    
+    			
+
         <div id="content">
+        	<div id="pageChange"><a href="myRequest?page="> 나의 신청내역 보기 </a> </div>
             <img class="icon-Img" src="resources/image/mypageIcon.png">
-			<a href="myRequest?page="> 나의 신청내역 보기 </a>
 			
             <div id="titleBox">내가 쓴 동행 게시글</div>
             <div class="detailBox">
@@ -273,26 +295,30 @@
 				      </div>
 				    </div>
 				  </div>
+				  
+				  
+				  
+				<div id="pagingArea">
+	                <ul class="pagination">
+	                	<c:if test="${pageInfo.currentPage gt 1}">
+		            	<li class="page-item"><a class="page-link" href="companionInvite?page=${pageInfo.currentPage - 1}"> < </a>
+		            	</c:if>
+		            	<c:forEach begin="${pageInfo.startPage}" end="${pageInfo.endPage}" var="i" step="1">
+			            	<c:choose>
+								<c:when test="${pageInfo.currentPage ne i }">
+									<li class="page-item"><a class="page-link" href="companionInvite?page=${i}"> ${i} </a>
+								</c:when>    
+								<c:otherwise>
+									<li class="page-item"><a class="page-link active" href="companionInvite?page=${i}">${i}</a>
+								</c:otherwise>        	
+			            	</c:choose>
+		           		</c:forEach>
+			            <c:if test="${not empty list && pageInfo.currentPage ne pageInfo.maxPage}">
+			            	<li class="page-item"><a class="page-link" href="companionInvite?page=${pageInfo.currentPage +1 }"> > </a>
+			            </c:if>	
+	                </ul>               
+	            </div>  
 	            
-
-	            <div class="box4"> 
-		            <c:if test="${pageInfo.currentPage gt 1}">
-		            	<a class="page-link" href="companionInvite?page=${pageInfo.currentPage - 1}"> < </a>
-		            </c:if>
-		            <c:forEach begin="${pageInfo.startPage}" end="${pageInfo.endPage}" var="i" step="1">
-		            	<c:choose>
-							<c:when test="${pageInfo.currentPage ne i }">
-								<a class="page-link" href="companionInvite?page=${i}"> ${i} </a>
-							</c:when>    
-							<c:otherwise>
-								<a class="page-link active" href="companionInvite?page=${i}">${i}</a>
-							</c:otherwise>        	
-		            	</c:choose>
-		            </c:forEach>
-		            <c:if test="${not empty list && pageInfo.currentPage ne pageInfo.maxPage}">
-		            	<a class="page-link" href="companionInvite?page=${pageInfo.currentPage +1 }"> > </a>
-		            </c:if>	
-	            </div>
             </div>
         </div>
         
