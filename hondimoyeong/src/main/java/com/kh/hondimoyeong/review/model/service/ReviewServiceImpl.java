@@ -110,6 +110,11 @@ public class ReviewServiceImpl implements ReviewService {
 		return reviewMapper.delete(reviewNo);
 	}
 
+	@Override
+	public int deleteImg(int reviewNo) {
+		return reviewMapper.deleteImg(reviewNo);
+	}
+
 
 
 

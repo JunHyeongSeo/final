@@ -86,6 +86,12 @@
 	    resize: none;
 	}
 	
+	.file_label{
+		font-size: 15px;
+		color: #777;
+		float: right;
+	}
+	
 	/* 등록 취소 버튼 */
 	.detail_btn_box{
 	    width: 800px;
@@ -209,16 +215,22 @@
 						</tr>
 						<tr>
 							<th>* 내용</th>
-							<td><textarea class="content_inp" name="reviewContent" required>${reviewImg}</textarea>
+							<td><textarea class="content_inp" name="reviewContent" required>${review.reviewContent}</textarea>
+                            </td>
+						</tr>
+						 <tr>
+							<th>* 첨부파일</th>
+							<td>
+								<input type="file" name="reUpfile1" id="reUpfile1" style="padding-right: 35px;"> <span class="file_label">* 썸네일로 등록 되는 이미지 입니다.</span>
                             </td>
 						</tr>
                         <tr>
 							<th>* 첨부파일</th>
 							<td>
-                                <input type="file" name="reUpfile1" id="file1" style="padding-right: 35px;">
-								<input type="file" name="reUpfile2" id="file2">
+								<input type="file" name="reUpfile2" id="reUpfile2">
                             </td>
 						</tr>
+
 					</tbody>
 				</table>
                 <div class="detail_btn_box" align="center">
