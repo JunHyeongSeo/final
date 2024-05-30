@@ -125,7 +125,7 @@
     <div id="wrap">
         <div id="content">
             <div id="box-title">
-                <h4 style="font-size: 22px;">🍊 비밀번호 찾기</h4>
+                <h4>🍊 비밀번호 찾기</h4>
             </div>
             <div class="input-box">
                 <p>아이디</p>
