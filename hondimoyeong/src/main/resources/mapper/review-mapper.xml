@@ -263,7 +263,9 @@
 	
 	<select id="selectReviewImgs" parameterType="_int" resultMap="reviewImgResultSet">
 		SELECT
+			  RI.REVIEW_NO,
 		      REVIEW_TITLE,
+		      ORIGIN_NAME,
 		      CHANGE_NAME
 		  FROM
 		      REVIEW_IMG RI
