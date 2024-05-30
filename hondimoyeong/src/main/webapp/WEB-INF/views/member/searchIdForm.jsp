@@ -142,7 +142,7 @@
     <div id="wrap">
         <div id="content">
             <div id="box-title">
-                <h4>아이디 찾기</h4>
+                <h4>🍊 아이디 찾기</h4>
             </div>
             <div class="input-box">
                 <p>이름</p>
