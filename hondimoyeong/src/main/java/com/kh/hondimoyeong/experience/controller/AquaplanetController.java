@@ -5,6 +5,9 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.context.annotation.PropertySources;
+import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,11 +19,17 @@ import com.kh.hondimoyeong.experience.model.vo.Experience;
 import com.kh.hondimoyeong.experience.model.vo.Exreview;
 import com.kh.hondimoyeong.member.model.vo.Member;
 
+@PropertySources(@PropertySource("classpath:config.properties"))
 @Controller
 public class AquaplanetController {
 	
 	@Autowired
 	private  ReserveService reserveService;
+	
+	@Autowired
+	private Environment env;
+	
+	
 	
 	@RequestMapping("aqua")
 	public String aqua(HttpSession session) {
@@ -53,7 +62,10 @@ public class AquaplanetController {
 	}
 	
 	@GetMapping("aquadetail")
-	public String aquadetail() {
+	public String aquadetail(HttpSession session) {
+		
+		
+		session.setAttribute("appkey", env.getProperty("appkey"));
 		return "experience/aquadetail";
 	}
 	

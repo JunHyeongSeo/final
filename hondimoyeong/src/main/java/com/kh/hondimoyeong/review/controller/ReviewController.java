@@ -166,29 +166,75 @@ public class ReviewController {
 	    reviewService.update(review); // 리뷰 업데이트
 
 	    int reviewNo = review.getReviewNo();
+	    
+	    if (reviewNo > 0) {
+	    	
+	        boolean hasNewFiles = false;
+	        
+	        for (MultipartFile file : reUpfiles1) {
+	            if (!file.isEmpty()) {
+	                hasNewFiles = true;
+	                break;
+	            }
+	        }
+	        
+	        if (!hasNewFiles) {
+	            for (MultipartFile file : reUpfiles2) {
+	                if (!file.isEmpty()) {
+	                    hasNewFiles = true;
+	                    break;
+	                }
+	            }
+	        }
 
-	    if (reviewNo > 0) { // 리뷰가 수정 될 경우
-	        // 기존 이미지 삭제
-	        List<ReviewImg> existingImages = reviewService.selectReviewImgs(reviewNo);
-	        for (ReviewImg img : existingImages) {
-	            new File(session.getServletContext().getRealPath(img.getChangeName())).delete();
+	        if (!hasNewFiles && reUpfiles1.length == 0 && reUpfiles2.length == 0) {
+	            // 새로운 첨부 파일이 없는 경우에만 기존 이미지 삭제
+	            List<ReviewImg> existingImages = reviewService.selectReviewImgs(reviewNo);
+	            for (ReviewImg img : existingImages) {
+	                new File(session.getServletContext().getRealPath(img.getChangeName())).delete();
+	            }
 	        }
 
 	        List<MultipartFile> reviewImgs = new ArrayList<MultipartFile>();
 	        
-	        
 	        for (MultipartFile file : reUpfiles1) {
 	            if (!file.isEmpty()) {
-	            	reviewImgs.add(file);
+	                // 새로운 이미지 객체 생성
+	                ReviewImg reviewImg = new ReviewImg();
+	                reviewImg.setReviewNo(reviewNo);
+	                reviewImg.setOriginName(file.getOriginalFilename());
+	                
+	                // 첨부 파일을 저장하고 저장된 파일명을 설정
+	                String changeName = saveFile(file, session);
+	                reviewImg.setChangeName(changeName);
+	                
+	                // 파일 레벨 설정
+	                reviewImg.setFileLevel(1); // 첫 번째 파일 레벨
+	                
+	                // DB에 새로운 이미지 등록
+	                reviewService.insertImg(reviewImg);
 	            }
 	        }
-	        
+
 	        for (MultipartFile file : reUpfiles2) {
 	            if (!file.isEmpty()) {
-	            	reviewImgs.add(file);
+	                // 새로운 이미지 객체 생성
+	                ReviewImg reviewImg = new ReviewImg();
+	                reviewImg.setReviewNo(reviewNo);
+	                reviewImg.setOriginName(file.getOriginalFilename());
+	                
+	                // 첨부 파일을 저장하고 저장된 파일명을 설정
+	                String changeName = saveFile(file, session);
+	                reviewImg.setChangeName(changeName);
+	                
+	                // 파일 레벨 설정
+	                reviewImg.setFileLevel(2); // 두 번째 파일 레벨
+	                
+	                // DB에 새로운 이미지 등록
+	                reviewService.insertImg(reviewImg);
 	            }
 	        }
-	        
+
 	        for (int i = 0; i < reviewImgs.size(); i++) {
 	            MultipartFile upfile = reviewImgs.get(i);
 	            String originalFilename = upfile.getOriginalFilename();
@@ -206,11 +252,8 @@ public class ReviewController {
 	            } else {
 	                reviewImg.setFileLevel(2); // 두 번째 파일 레벨
 	            }
-	            
 	            reviewService.updateImg(reviewImg);
-	            
 	        }
-	        
 	        session.setAttribute("alertMsg", "게시글 수정 성공!");
 	        return "redirect:detail.rvw?reviewNo=" + reviewNo;
 	    } else { 
@@ -219,6 +262,16 @@ public class ReviewController {
 	    }
 	}
 
+	@PostMapping("updateForm.rvw")
+	public ModelAndView updateForm(int reviewNo, ModelAndView mv, Course course) {
+		
+		List<Course> courseList = reviewService.selectCourse(course);
+		List<ReviewImg> reviewImg = reviewService.selectReviewImgs(reviewNo);
+		mv.addObject("reviewImg", reviewImg);
+		mv.addObject("courseList", courseList);
+		mv.addObject("review", reviewService.selectReview(reviewNo)).setViewName("review/reviewUpdateForm");
+		return mv;
+	}
 
 	public String saveFile(MultipartFile upfile, HttpSession session) {
 	    String originName = upfile.getOriginalFilename();
@@ -237,14 +290,6 @@ public class ReviewController {
 	    return "resources/reviewFile/" + changeName;
 	}
 	
-	@PostMapping("updateForm.rvw")
-	public ModelAndView updateForm(int reviewNo, ModelAndView mv, Course course) {
-		
-		List<Course> courseList = reviewService.selectCourse(course);
-		mv.addObject("courseList", courseList);
-		mv.addObject("review", reviewService.selectReview(reviewNo)).setViewName("review/reviewUpdateForm");
-		return mv;
-	}
 
 	@RequestMapping("delete.rvw")
 	public String delete(int reviewNo, HttpSession session, String filePath) {
