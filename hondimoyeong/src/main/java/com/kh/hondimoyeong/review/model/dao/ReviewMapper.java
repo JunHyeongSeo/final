@@ -48,4 +48,5 @@ public interface ReviewMapper {
 
 	int delete(int reviewNo);
 
+	int deleteImg(int reviewNo);
 }

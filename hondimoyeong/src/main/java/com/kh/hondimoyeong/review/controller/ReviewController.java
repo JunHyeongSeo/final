@@ -305,6 +305,7 @@ public class ReviewController {
 	        List<ReviewImg> existingImages = reviewService.selectReviewImgs(reviewNo);
 	        for (ReviewImg img : existingImages) {
 	            new File(session.getServletContext().getRealPath(img.getChangeName())).delete();
+	            reviewService.deleteImg(img.getReviewNo());
 	        }
 			session.setAttribute("alertMsg", "삭제 성공");
 			return "redirect:review";
