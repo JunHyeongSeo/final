@@ -278,7 +278,14 @@
 			                <input type="hidden" value="${r.reviewNo}" />
 			                <div class="box_course">${r.courseName}</div>
 			                <div class="box_star" data-rating="${r.reviewStar}">${r.reviewStar}</div>
-			                <div class="img_box"><img src="${r.changeName}" class="thumbNail"/></div>
+			                <c:choose>
+			                	<c:when test="${empty r.changeName}">
+					                <div class="img_box"><img src="${path}/resources/reviewFile/defaultImg.png" class="thumbNail"/></div>
+			                	</c:when>
+			                	<c:otherwise>
+					                <div class="img_box"><img src="${r.changeName}" class="thumbNail"/></div>
+			                	</c:otherwise>
+			                </c:choose>
 			                <div class="box_title">${r.reviewTitle}</div>
 			                <div class="box_info">
 			                    <div class="box_write"><a>작성자 : ${r.userName}</a></div>

@@ -156,8 +156,15 @@
 
         <div class="insert_box">
             <form action="update.rvw" method="post" id="myform" enctype="multipart/form-data">
+            
             	<input type="hidden" name="userNo" value="${ sessionScope.loginUser.userNo }"/>
             	<input type="hidden" name="reviewNo" value="${review.reviewNo}">
+            	
+           	    <c:if test="${not empty reviewImg}">
+			        <c:forEach var="img" items="${reviewImg}">
+			            <input type="hidden" name="oldFileNames" value="${img.changeName}">
+			        </c:forEach>
+			    </c:if>
             	
 				<table class="tb_input">
 					<tbody>
@@ -202,7 +209,7 @@
 						</tr>
 						<tr>
 							<th>* 내용</th>
-							<td><textarea class="content_inp" name="reviewContent" required>${review.reviewContent}</textarea>
+							<td><textarea class="content_inp" name="reviewContent" required>${reviewImg}</textarea>
                             </td>
 						</tr>
                         <tr>
