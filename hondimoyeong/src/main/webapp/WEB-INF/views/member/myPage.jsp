@@ -123,7 +123,7 @@
     <div id="wrap">
         <div id="content">
             <img class="icon-Img" src="resources/image/mypageIcon.png">
-            <div id="idBox" name="userId">🍊${ sessionScope.loginUser.userName }님🍊</div>
+            <div id="idBox" name="userId">🍊 ${ sessionScope.loginUser.userName }님 🍊</div>
             <div id="subIcon">
                 <div id="iconBox">
                     <img class="icon-box" src="resources/image/icon1.png">
