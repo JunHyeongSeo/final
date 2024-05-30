@@ -8,6 +8,7 @@ import java.util.Map;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.PropertySources;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
@@ -24,6 +25,7 @@ import com.kh.hondimoyeong.experience.model.vo.Reserve;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.java.Log;
 
+@PropertySources("classpath:config.properties")
 @Service
 @RequiredArgsConstructor
 @Transactional

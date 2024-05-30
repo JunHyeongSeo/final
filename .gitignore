@@ -21,6 +21,7 @@ local.properties
 # ignore properties file
 config.properties
 config.xml
+key.properties
 
 # External tool builders
 .externalToolBuilders/
