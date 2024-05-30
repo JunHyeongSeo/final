@@ -37,12 +37,10 @@ public class AquaplanetController {
 		if(!(session.getAttribute("loginUser")== null)) {
 			
 			int userNo = ((Member)session.getAttribute("loginUser")).getUserNo();
-			//System.out.println(userNo);
 			
 			
 			if(userNo > 0) {
 				List<Experience> experience = reserveService.excheck(userNo);
-				System.out.println(experience);
 				
 				if(!(experience == null)) {
 					session.setAttribute("experience", experience);
@@ -50,7 +48,7 @@ public class AquaplanetController {
 			}
 		}
 		
-		// 한라산 리뷰 전부 조회
+		// 아쿠아리움 리뷰 전부 조회
 		Exreview exreview = new Exreview();
 		
 		exreview.setExperienceCategory("아쿠아리움");
@@ -78,7 +76,6 @@ public class AquaplanetController {
 	@PostMapping("exreviewa")
 	public String exriview(Exreview exreview, HttpSession session) {
 		
-		System.out.println("쓴리뷰" + exreview);
 		
 		int experienceNo = ((List<Experience>)session.getAttribute("experience")).get(0).getExperienceNo();
 		

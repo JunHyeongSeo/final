@@ -17,7 +17,6 @@
 *{
 	box-sizing : border-box;
 	margin : 0;
-	border:1px solid red;
 }
 
     #reserve{
@@ -26,28 +25,26 @@
         width: 1200px;
         height: 600px;
         margin: auto;
-        border : 1px solid black;
     }
 
     #a{
         width: 50%;
         height: 100%;
         float : left;
-        border : 1px solid blue;
+        padding-top:10px;
+        padding-left:10px;
     }
 
     #title{
         width: 500px;
         height: 80px;
         margin: 30px;
-        border : 1px solid red;
     }
 
     #select-area{
         width : 500px;
         height: 450px;
         margin : 30px;
-        border : 1px solid black;
 
     }
 
@@ -55,7 +52,6 @@
         width: 580px;
         height: 100%;
         float : left;
-        border : 1px solid forestgreen;
     }
 
     #b > img{
@@ -110,7 +106,6 @@
     
 </head>
 <body>
-
 	<jsp:include page ="../common/header.jsp" />
 	
 	<div id="reserve">
@@ -118,47 +113,38 @@
 			<h1>제주입장권</h1>
 			<b>아쿠아리움 + 오션아레나 공연 + 유미의 세포들 특별전 &nbsp;&nbsp;</b><span class="discount">18%</span><br><br>
 			
-			
-			
 			<form method="post" action="kakaoPay">
-			
 				<input type="date" name="experienceDate" id="Date"><!-- 1 -->
 				
 				<select id="changeaqua1">
 					<option value="종일(09:30 - 18:00)">종일(09:30 - 18:00)</option>
 				</select>
 				
-				<input type="hidden" name="experienceTime" value="종일(09:30 - 18:00)"><!-- 2 -->
-				
+				<input type="hidden" name="experienceTime" value="종일(09:30 - 18:00)">
 				
 				<select id="changeaqua2">
 					<option id="op1" value="제주입장권_대소공통">제주입장권_대소공통</option>
 				</select>
 				
-				<input type="hidden" name="experienceDivide" value="제주입장권_대소공통"><!-- 3 -->
-				
+				<input type="hidden" name="experienceDivide" value="제주입장권_대소공통">
 				
 				<div id="aquaprice" >
-				
 					<!-- 빼기 버튼 -->
 					<button type="button" id="sub" class="btn btn-outline-danger">-</button>
 					
 					<span id="span1" style="width:120px">${ price }</span>원
-					<input type="hidden" name="price" id="price" value="36000"><!-- 4 -->
+					<input type="hidden" name="price" id="price" value="36000">
 					
 					<!-- 더하기 버튼 -->
 					<button type="button" id="add" class="btn btn-outline-primary">+</button>&nbsp;
 					
 					<span id="person1" >1</span>명
-					<input type="hidden" id="person1-val" name="experiencePeople" value="1"><!-- 5 -->
-					
+					<input type="hidden" id="person1-val" name="experiencePeople" value="1">
 				</div>
-				
 				
 				<br>
 				
-				<input type="hidden" id="category" name="category" value="아쿠아리움"><!-- 6 -->
-
+				<input type="hidden" id="category" name="category" value="아쿠아리움">
 
 				<c:choose>
 					<c:when test="${ empty sessionScope.loginUser}"><br>
@@ -171,19 +157,12 @@
 					</c:otherwise>
 				</c:choose>
 				</form>
-				
-				
-
-					
 		</div>
 		<div id="b">
 			<img id="imgg" src='resources/image/유미의세포들.jpg' />
 		</div>
 		
 	</div>
-	
-	
-	
 	
 	<script>
 	var now_utc = Date.now() // 지금 날짜를 밀리초로
@@ -210,71 +189,40 @@
 	$(function(){
 		$('#btn1').click(() => {
 			
-			
 			var dateString = $("#Date").val();
 			var timeString = $('#changeaqua1').children('option:selected').text();
 			var divideString = $('#changeaqua2').children('option:selected').text();
 			var price = $('#aquaprice').children('#span1').text()
 			var person = $('#aquaprice').children('#person1').text()
 			var category = $('#category').val();
-			/*
-			console.log(dateString);
-			console.log(timeString);
-			console.log(divideString);
-			console.log(price);
-			console.log(person);
-			console.log(category);
-			*/	
-			console.log( $('input[name=experienceDate]').val() );
-			console.log( $('input[name=experienceTime]').val() );
-			console.log( $('input[name=experienceDivide]').val() );
-			console.log( $('input[name=experiencePeople]').val() );
-			console.log( $('input[name=price]').val() );
-			console.log( $('input[name=category]').val() );
-		
-			
 			});
 		})
 
 		
 		$('#sub').click(function(){
-			//var num = $('#aquaprice').children('#span1').text();
 			var person = $('#aquaprice').children('#person1').text();
 			newPrice = Number(price) - 36000;
 			newperson = Number(person) - 1;
 			document.getElementById("span1").textContent = newPrice;
 			document.getElementById("person1").textContent = newperson
 			
-			console.log("dfdf" + $('#aquaprice').children('#span1').text())
-			
-			
 			num = $('#aquaprice').children('#person1').text();
 			$('#aquaprice').children('#person1').text(num);
 			
 			$('#person1-val').val(Number(num));
-			
-			console.log($('#person1-val').val());
-			
 			
 			price = $('#aquaprice').children('#span1').text()
 			$('#aquaprice').children('#span1').text(price)
 			
 			$('#price').val(Number(price));
 			
-			console.log($('#price').val());
-			
 			if ($('#aquaprice').children('#span1').text() == 36000 ) {
 				 $('#sub').attr("disabled",true);
 			}
 			
 			if ($('#aquaprice').children('#span1').text() < 36000 ) {
-				
 				$('#sub').removeAttr('disabled');
-			
 			}
-			
-			
-					
 		});
 		
 		$('#add').click(function(){
@@ -284,47 +232,20 @@
 		    document.getElementById("span1").textContent = newPrice;
 		    document.getElementById("person1").textContent = newperson
 	
-			// num = $('#aquaprice').children('#span1').text();
 			num = $('#aquaprice').children('#person1').text();
 			$('#aquaprice').children('#person1').text(num);
-			
 			$('#person1-val').val(Number(num));
-			//console.log($('#person1-val').val());
-			
 			
 			price = $('#aquaprice').children('#span1').text()
 			$('#aquaprice').children('#span1').text(price)
-			
 			$('#price').val(Number(price));
 			
-			
-			//console.log($('#price').val())
-			
 			if ($('#aquaprice').children('#span1').text() != 36000 ) {
-				
 				$('#sub').removeAttr('disabled');
-			
 			}
-			
-			
-			console.log($('#person1-val').val());
-			console.log($('#price').val())
-			
-			
-			
-			
 			
 		});
 		
-	
-		
-		
-	
-	
-	
-	
-	
-	
 	</script>
 
 	<jsp:include page ="../common/footer.jsp" />

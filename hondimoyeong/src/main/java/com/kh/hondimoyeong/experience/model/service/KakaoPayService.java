@@ -40,7 +40,7 @@ public class KakaoPayService {
 
     private Reserve reserve;
     
-    // api키 사용할 객체
+    // api키 사용 객체
     private final Environment env;
 
     public String kakaoPayReady(Experience ex, HttpSession session) {
