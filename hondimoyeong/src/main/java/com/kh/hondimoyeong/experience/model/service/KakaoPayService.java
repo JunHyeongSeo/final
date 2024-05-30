@@ -7,6 +7,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
@@ -36,15 +37,22 @@ public class KakaoPayService {
 
     private Reserve reserve;
     
+    @Value("${Kakao_admin_key_pay}")
+    private String Kakao_admin_key_pay;
+    
+   
     
 
     public String kakaoPayReady(Experience ex, HttpSession session) {
         RestTemplate restTemplate = new RestTemplate();
         restTemplate.setRequestFactory(new HttpComponentsClientHttpRequestFactory()); // 정확한 에러 파악을 위해 생성
 
+        System.out.println(Kakao_admin_key_pay);
+        
+        
         // Server Request Header : 서버 요청 헤더
         HttpHeaders headers = new HttpHeaders();
-        headers.add("Authorization", "SECRET_KEY " + devkey); // 어드민 키
+        headers.add("Authorization", "SECRET_KEY " + Kakao_admin_key_pay); // 어드민 키
         //headers.add("Accept", "application/json");
         //headers.add("Content-type", "application/x-www-form-urlencoded;charset=utf-8");
         headers.add("Content-type", "application/json");
