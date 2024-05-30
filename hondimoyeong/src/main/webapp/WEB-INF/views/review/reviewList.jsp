@@ -238,7 +238,6 @@
 	
     <div id="container">
         <div class="review_title"><a class="review_title_a" href="review">리뷰 게시판</a></div>
-
         <div class="review_search">
             <form action="search.rvw" class="review_searchForm">
                 <select name="condition" class="review_search_select">

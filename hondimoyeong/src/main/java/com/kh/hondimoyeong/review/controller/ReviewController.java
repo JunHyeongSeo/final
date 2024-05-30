@@ -168,9 +168,13 @@ public class ReviewController {
 	    int reviewNo = review.getReviewNo();
 	    
 	    if (reviewNo > 0) {
-	    	
-	        boolean hasNewFiles = false;
 	        
+	        // 기존 파일이 있는지 확인
+	        List<ReviewImg> existingImages = reviewService.selectReviewImgs(reviewNo);
+	        boolean hasExistingFiles = existingImages != null && !existingImages.isEmpty();
+	        
+	        // 새로운 파일이 있는지 확인
+	        boolean hasNewFiles = false;
 	        for (MultipartFile file : reUpfiles1) {
 	            if (!file.isEmpty()) {
 	                hasNewFiles = true;
@@ -187,56 +191,54 @@ public class ReviewController {
 	            }
 	        }
 
-	        if (!hasNewFiles && reUpfiles1.length == 0 && reUpfiles2.length == 0) {
-	            // 새로운 첨부 파일이 없는 경우에만 기존 이미지 삭제
-	            List<ReviewImg> existingImages = reviewService.selectReviewImgs(reviewNo);
+	        // 기존 이미지가 있을 때
+	        if (hasExistingFiles) {
+	            // 기존 이미지 업데이트 및 새로운 파일 insert
+	            for (int i = 0; i < existingImages.size(); i++) {
+	                ReviewImg existingImage = existingImages.get(i);
+	                MultipartFile newFile = null;
+	                if (i < reUpfiles1.length) {
+	                    newFile = reUpfiles1[i];
+	                } else if (i - reUpfiles1.length < reUpfiles2.length) {
+	                    newFile = reUpfiles2[i - reUpfiles1.length];
+	                }
+	                
+	                if (newFile != null && !newFile.isEmpty()) {
+	                    String originalFilename = newFile.getOriginalFilename();
+	                    String changeName = saveFile(newFile, session);
+	                    
+	                    existingImage.setOriginName(originalFilename);
+	                    existingImage.setChangeName(changeName);
+	                    // 파일 레벨 설정
+	                    if (i < reUpfiles1.length) {
+	                        existingImage.setFileLevel(1); // 첫 번째 파일
+	                    } else {
+	                        existingImage.setFileLevel(2); // 두 번째 파일
+	                    }
+	                    reviewService.updateImg(existingImage); // 기존 파일 업데이트
+	                }
+	            }
+	        } else { // 기존 이미지가 없을 때
 	            for (ReviewImg img : existingImages) {
 	                new File(session.getServletContext().getRealPath(img.getChangeName())).delete();
 	            }
+	            insertNewImages(reUpfiles1, reUpfiles2, reviewNo, session);
 	        }
 
-	        List<MultipartFile> reviewImgs = new ArrayList<MultipartFile>();
-	        
-	        for (MultipartFile file : reUpfiles1) {
-	            if (!file.isEmpty()) {
-	                // 새로운 이미지 객체 생성
-	                ReviewImg reviewImg = new ReviewImg();
-	                reviewImg.setReviewNo(reviewNo);
-	                reviewImg.setOriginName(file.getOriginalFilename());
-	                
-	                // 첨부 파일을 저장하고 저장된 파일명을 설정
-	                String changeName = saveFile(file, session);
-	                reviewImg.setChangeName(changeName);
-	                
-	                // 파일 레벨 설정
-	                reviewImg.setFileLevel(1); // 첫 번째 파일 레벨
-	                
-	                // DB에 새로운 이미지 등록
-	                reviewService.insertImg(reviewImg);
-	            }
-	        }
+	        session.setAttribute("alertMsg", "게시글 수정 성공!");
+	        return "redirect:detail.rvw?reviewNo=" + reviewNo;
+	    } else { 
+	        model.addAttribute("errorMsg", "수정 실패");
+	        return "common/errorPage";
+	    }
+	}
 
-	        for (MultipartFile file : reUpfiles2) {
-	            if (!file.isEmpty()) {
-	                // 새로운 이미지 객체 생성
-	                ReviewImg reviewImg = new ReviewImg();
-	                reviewImg.setReviewNo(reviewNo);
-	                reviewImg.setOriginName(file.getOriginalFilename());
-	                
-	                // 첨부 파일을 저장하고 저장된 파일명을 설정
-	                String changeName = saveFile(file, session);
-	                reviewImg.setChangeName(changeName);
-	                
-	                // 파일 레벨 설정
-	                reviewImg.setFileLevel(2); // 두 번째 파일 레벨
-	                
-	                // DB에 새로운 이미지 등록
-	                reviewService.insertImg(reviewImg);
-	            }
-	        }
 
-	        for (int i = 0; i < reviewImgs.size(); i++) {
-	            MultipartFile upfile = reviewImgs.get(i);
+	private void insertNewImages(MultipartFile[] reUpfiles1, MultipartFile[] reUpfiles2, int reviewNo, HttpSession session) {
+	    // 새로운 파일 insert
+	    for (int i = 0; i < reUpfiles1.length; i++) {
+	        MultipartFile upfile = reUpfiles1[i];
+	        if (!upfile.isEmpty()) {
 	            String originalFilename = upfile.getOriginalFilename();
 	            String changeName = saveFile(upfile, session);
 	            
@@ -245,22 +247,28 @@ public class ReviewController {
 	            reviewImg.setReviewNo(reviewNo);
 	            reviewImg.setOriginName(originalFilename);
 	            reviewImg.setChangeName(changeName);
-	            
-	            // 파일 레벨 설정
-	            if (i < reUpfiles1.length) {
-	                reviewImg.setFileLevel(1); // 첫 번째 파일 레벨
-	            } else {
-	                reviewImg.setFileLevel(2); // 두 번째 파일 레벨
-	            }
-	            reviewService.updateImg(reviewImg);
+	            reviewImg.setFileLevel(1); // 첫 번째 파일 레벨
+	            reviewService.insertImg(reviewImg); // 새로운 파일 insert
 	        }
-	        session.setAttribute("alertMsg", "게시글 수정 성공!");
-	        return "redirect:detail.rvw?reviewNo=" + reviewNo;
-	    } else { 
-	        model.addAttribute("errorMsg", "수정 실패");
-	        return "common/errorPage";
+	    }
+	    
+	    for (int i = 0; i < reUpfiles2.length; i++) {
+	        MultipartFile upfile = reUpfiles2[i];
+	        if (!upfile.isEmpty()) {
+	            String originalFilename = upfile.getOriginalFilename();
+	            String changeName = saveFile(upfile, session);
+	            
+	            // REVIEW_IMG 테이블에 파일 정보 삽입
+	            ReviewImg reviewImg = new ReviewImg();
+	            reviewImg.setReviewNo(reviewNo);
+	            reviewImg.setOriginName(originalFilename);
+	            reviewImg.setChangeName(changeName);
+	            reviewImg.setFileLevel(2); // 두 번째 파일 레벨
+	            reviewService.insertImg(reviewImg); // 새로운 파일 insert
+	        }
 	    }
 	}
+
 
 	@PostMapping("updateForm.rvw")
 	public ModelAndView updateForm(int reviewNo, ModelAndView mv, Course course) {
