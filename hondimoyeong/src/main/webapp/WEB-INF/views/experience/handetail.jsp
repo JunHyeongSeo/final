@@ -147,7 +147,7 @@
 		<h5>플레이스</h5>
 		<div id="map" style="width:100%;height:350px;"></div>
 
-		<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=8ddac81d17cea530c11b70881c406c61"></script>
+		<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=${ sessionScope.appkey }"></script>
 		<script>
 		var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 		    mapOption = { 
