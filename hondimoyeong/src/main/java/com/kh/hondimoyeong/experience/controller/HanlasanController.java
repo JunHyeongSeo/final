@@ -50,7 +50,6 @@ public class HanlasanController {
 		Exreview exreview = new Exreview();
 		exreview.setExperienceCategory("한라산");
 		List<Exreview> review = reserveService.review(exreview);
-		System.out.println("흠 " + review);
 		session.setAttribute("reviewh", review);
 		
 		return "experience/hanlasan";

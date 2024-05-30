@@ -48,7 +48,6 @@ public class TangerineController {
 		
 		exreview.setExperienceCategory("감귤체험");
 		List<Exreview> review = reserveService.review(exreview);
-		System.out.println("흠 " + review);
 		session.setAttribute("reviewg", review);
 		
 		session.setAttribute("appkey", env.getProperty("appkey"));

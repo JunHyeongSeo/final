@@ -55,7 +55,6 @@ public class AquaplanetController {
 		
 		exreview.setExperienceCategory("아쿠아리움");
 		List<Exreview> review = reserveService.review(exreview);
-		System.out.println("흠 " + review);
 		session.setAttribute("reviewa", review);
 		
 		return "experience/aquaplanet";
