@@ -7,7 +7,9 @@ import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.context.annotation.PropertySources;
+import org.springframework.core.env.Environment;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
@@ -24,6 +26,9 @@ import com.kh.hondimoyeong.experience.model.vo.Reserve;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.java.Log;
 
+//api 키 저장
+@PropertySources(@PropertySource("classpath:/config.properties"))
+
 @Service
 @RequiredArgsConstructor
 @Transactional
@@ -32,27 +37,21 @@ import lombok.extern.java.Log;
 public class KakaoPayService {
     private static final String Host = "https://open-api.kakaopay.com/online/v1/payment/ready";
     private static final String Host2 = "https://open-api.kakaopay.com/online/v1/payment/approve";
-    private static final String devkey = "DEVCE517BBAF3A98F3BD12990853FA33292E0A7D";
-
 
     private Reserve reserve;
     
-    @Value("${Kakao_admin_key_pay}")
-    private String Kakao_admin_key_pay;
-    
-   
-    
+    // api키 사용할 객체
+    private final Environment env;
 
     public String kakaoPayReady(Experience ex, HttpSession session) {
         RestTemplate restTemplate = new RestTemplate();
         restTemplate.setRequestFactory(new HttpComponentsClientHttpRequestFactory()); // 정확한 에러 파악을 위해 생성
 
-        System.out.println(Kakao_admin_key_pay);
         
-        
+        System.out.println(env);
         // Server Request Header : 서버 요청 헤더
         HttpHeaders headers = new HttpHeaders();
-        headers.add("Authorization", "SECRET_KEY " + Kakao_admin_key_pay); // 어드민 키
+        headers.add("Authorization", "SECRET_KEY " + env.getProperty("Kakao_admin_key_pay")); // 어드민 키
         //headers.add("Accept", "application/json");
         //headers.add("Content-type", "application/x-www-form-urlencoded;charset=utf-8");
         headers.add("Content-type", "application/json");
@@ -108,7 +107,7 @@ public class KakaoPayService {
 
          // Server Request Header : 서버 요청 헤더
          HttpHeaders headerss = new HttpHeaders();
-         headerss.add("Authorization", "SECRET_KEY " + devkey); // 어드민 키
+         headerss.add("Authorization", "SECRET_KEY " + env.getProperty("Kakao_admin_key_pay")); // 어드민 키
          //headers.add("Accept", "application/json");
          //headers.add("Content-type", "application/x-www-form-urlencoded;charset=utf-8");
          headerss.add("Content-type", "application/json");

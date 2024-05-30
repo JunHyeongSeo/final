@@ -5,6 +5,7 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,6 +23,9 @@ public class HanlasanController {
 	
 	@Autowired
 	private  ReserveService reserveService;
+	
+	@Autowired
+	private Environment env;
 	
 	@RequestMapping("hanlasan")
 	public String hanlasan(HttpSession session){
@@ -46,14 +50,14 @@ public class HanlasanController {
 		Exreview exreview = new Exreview();
 		exreview.setExperienceCategory("한라산");
 		List<Exreview> review = reserveService.review(exreview);
-		System.out.println("흠 " + review);
 		session.setAttribute("reviewh", review);
 		
 		return "experience/hanlasan";
 	}
 	
 	@GetMapping("handetail")
-	public String handetail() {
+	public String handetail(HttpSession session) {
+		session.setAttribute("appkey", env.getProperty("appkey"));
 		return "experience/handetail";
 	}    
 	

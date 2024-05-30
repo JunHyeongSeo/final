@@ -5,6 +5,7 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,6 +20,9 @@ public class TangerineController {
 	
 	@Autowired
 	private  ReserveService reserveService;
+	
+	@Autowired
+	private Environment env;
 	
 	@GetMapping("tangerine")
 	public String tangerine(HttpSession session) {
@@ -44,8 +48,10 @@ public class TangerineController {
 		
 		exreview.setExperienceCategory("감귤체험");
 		List<Exreview> review = reserveService.review(exreview);
-		System.out.println("흠 " + review);
 		session.setAttribute("reviewg", review);
+		
+		session.setAttribute("appkey", env.getProperty("appkey"));
+		
 		return "experience/tangerine";
 	}
 	

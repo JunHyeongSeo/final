@@ -127,7 +127,7 @@
     <div id="wrap">
         <div id="content">
             <div id="loginTitle">
-                <h4>로그인</h4>
+                <h4>🍊 로그인</h4>
             </div>
             <form action="login.member" method="post">
             <div id="idBox">

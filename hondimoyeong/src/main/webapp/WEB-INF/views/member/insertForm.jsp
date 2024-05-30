@@ -152,7 +152,7 @@
     <div id="wrap">
         <div id="content">
             <div id="signupTitle">
-                <h4>회원가입</h4>
+                <h4>🍊 회원가입</h4>
             </div>
             
             <form action="insert.member" method="post">
