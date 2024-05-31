@@ -31,7 +31,7 @@
             /*마이페이지 전체 박스*/
             #content{ 
                 width: 800px;
-                height: 1250px;
+                height: 1260px;
                 margin: 0 auto;
                 margin-top: 150px;
                 /* background-color: #FFF2D7; */
@@ -135,6 +135,23 @@
                 width : 100%;
                 height : 70%;
             }
+            
+            .box1{
+		    	margin-left: 600px;
+		    	margin-bottom: 10px;
+		    }
+		    
+            .btn-b{
+                width: 60px;
+                height: 35px;
+                border-radius: 15px;
+                background-color: #9e9e9e; 
+                color: #ffffff;
+                font-weight: bold;
+                font-size: 12px;
+                line-height: 35px;
+                border: 0;
+            }		    
 
     </style>    
 </head>
@@ -147,6 +164,7 @@
             <div id="titleBox">완주한 코스</div>
             
             <div id="detailBox">
+            <div class="box1"><button class="btn-b" onclick="location.href='myPage';">목록</button></div>
 	            <c:forEach var="course" items="${list}">
 					 <div class="map">
 					 	<img id="${course.courseIndex}" src="${course.changeName}">

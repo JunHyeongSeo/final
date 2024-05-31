@@ -208,7 +208,7 @@
         <div id="content">
             <img class="icon-Img" src="resources/image/mypageIcon.png">
 
-            <div id="titleBox">문의하기</div>
+            <div id="titleBox">글 등록하기</div>
             
 			<form id="enrollForm" method="post" action="insert.customer" enctype="multipart/form-data"> 
 			    <div id="detailBox">
