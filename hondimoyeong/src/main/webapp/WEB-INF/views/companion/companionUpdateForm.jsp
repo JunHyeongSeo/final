@@ -9,6 +9,7 @@
 <meta charset="UTF-8">
 <title>혼디모영 - 글 수정</title>
 
+<script type="text/javascript" src="/hondimoyeong/resources/static/smarteditor/js/HuskyEZCreator.js" charset="utf-8"></script>
 <!-- 필수 JS/CSS { -->
 <link type="text/css" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/base/jquery-ui.css" rel="stylesheet" />
 <!-- } -->
@@ -60,7 +61,7 @@
 	    font-size: 15px;
 	}
 	
-	.title_inp, .date_inp, .course_inp, .people_inp, .content_inp{
+	.title_inp, .date_inp, .course_inp, .people_inp, .companionContent{
 		height: 40px;
 		border: 1px solid #b1b1b1;
 		outline:none;
@@ -89,8 +90,8 @@
 	    line-height: 0px;
 	}
 	
-	.content_inp{
-	    width: 650px;
+	.companionContent{
+	    width: 648px;
 	    height: 400px;
 	    resize: none;
 	}
@@ -174,13 +175,13 @@
 						<tr>
 							<th>* 내용</th>
 							<td>
-								<textarea class="content_inp" name="companionContent">${companion.companionContent}</textarea>
+								<textarea class="companionContent" name="companionContent" id="companionContent">${companion.companionContent}</textarea>
 							</td>
 						</tr>
 					</tbody>
 				</table>
                 <div class="detail_btn_box" align="center">
-                    <button class="hdmy_detail_btn" type="submit">등록</button>
+                    <button class="hdmy_detail_btn" type="submit" id="companionContent" onclick="submitPost();">등록</button>
                     <button class="hdmy_detail_btn" type="button" onclick="backPage();">취소</button>
                 </div>
             </form>
@@ -201,6 +202,31 @@
     		location.href = '${path}/companion'
     	}
     </script>
+    
+        
+    <script type="text/javascript">
+		var oEditors = [];
+		nhn.husky.EZCreator.createInIFrame({
+		 oAppRef: oEditors,
+		 elPlaceHolder: "companionContent",
+		 sSkinURI: "/hondimoyeong/resources/static/smarteditor/SmartEditor2Skin.html",
+		 fCreator: "createSEditor2"
+		});
+		
+   	 
+	   	 submitPost = function(){
+	   		 oEditors.getById["companionContent"].exec("UPDATE_CONTENTS_FIELD", [])
+	   		 let content = document.getElementById("companionContent").value
+	   		 
+	   		 if(content == ''){
+	   			 alert("내용 입력")
+	   			 oEditors.getById["companionContent"].exec("FOCUS")
+	   			 return
+	   		 } else {
+	   			 console.log(content)
+	   		 }
+	   	 }
+	</script>
 
 </body>
 </html>

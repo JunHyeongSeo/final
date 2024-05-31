@@ -161,14 +161,13 @@
 									<th>* 내용</th>
 									<td>
 									<textarea class="companionContent" name="companionContent" id="companionContent"></textarea>
-									<!-- <textarea class="companionContent" name="companionContent"></textarea> -->
 									</td>
 								</tr>
 							</tbody>
 						</table>
 		                <div class="detail_btn_box" align="center">
 		                    <button class="hdmy_detail_btn" id="companionContent" type="submit" onclick="submitPost();">등록</button>
-		                    <button class="hdmy_detail_btn" onclick="backPage();">취소</button>
+		                    <button class="hdmy_detail_btn" type="button" onclick="backPage();">취소</button>
 		                </div>
 		            </form>
 		        </div> <!-- inset_box -->
@@ -185,26 +184,26 @@
 		 sSkinURI: "/hondimoyeong/resources/static/smarteditor/SmartEditor2Skin.html",
 		 fCreator: "createSEditor2"
 		});
+
 	</script>
 	
     <script>
     	 function backPage(){
-    		 location.href = '${path}/companion';
+    		 location.href = '${path}/companion?page=1';
     	 }
-    	 
-    	 submitPost = function(){
-    		 oEditors.getById["companionContent"].exec("UPDATE_CONTENTS_FIELD", [])
-    		 let content = document.getElementById("companionContent").value
-    		 
-    		 if(content == ''){
-    			 alert("내용 입력")
-    			 oEditors.getById["companionContent"].exec("FOCUS")
-    			 return
-    		 } else {
-    			 console.log(content)
-    		 }
-    		 
-    	 }
+ 		
+	   	 submitPost = function(){
+	   		 oEditors.getById["companionContent"].exec("UPDATE_CONTENTS_FIELD", [])
+	   		 let content = document.getElementById("companionContent").value
+	   		 
+	   		 if(content == ''){
+	   			 alert("내용 입력")
+	   			 oEditors.getById["companionContent"].exec("FOCUS")
+	   			 return
+	   		 } else {
+	   			 console.log(content)
+	   		 }
+	   	 }
     </script>
     
 
