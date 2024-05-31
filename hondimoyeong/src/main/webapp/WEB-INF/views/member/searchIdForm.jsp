@@ -202,8 +202,7 @@
                     phone: phone,
                     email: email
                 },
-                success: function(data) {
-                   //console.log(data);
+                success: (data) => {
                    let maskedUsername;
              
                    maskedUsername = maskUsername(data.userId);
@@ -215,7 +214,7 @@
                     $('#userId').text(maskedUsername);
                     $('#idModal').modal('show');
                 },
-                error: function(xhr, status, error) {
+                error: (xhr, status, error) => {
                     console.error('에러:', error);
                 }
             });
