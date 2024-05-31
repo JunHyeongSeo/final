@@ -15,29 +15,29 @@
         width: 1200px;
         height: 800px;
         margin: auto;
-        border : 1px solid black;
     }
 
     #a{
         width: 50%;
         height: 75%;
         float : left;
-        border : 1px solid blue;
     }
     #aa{
     	widht : 100%;
     }
     #aa > img{
+    	padding-top:5px;
+    	
     	width:190px;
     }
     #b{
         width: 580px;
         height: 75%;
         float : left;
-        border : 1px solid forestgreen;
     }
 
     #b > img{
+    	padding-top:10px;
         width: 100%;
         height: 100%;
     }
