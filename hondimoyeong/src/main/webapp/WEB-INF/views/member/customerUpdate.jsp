@@ -209,7 +209,7 @@
         <div id="content">
             <img class="icon-Img" src="resources/image/mypageIcon.png">
 
-            <div id="titleBox">문의글 수정하기</div>
+            <div id="titleBox">글 수정하기</div>
             
 			<form id="enrollForm" method="post" action="update.customer" enctype="multipart/form-data"> 
 			    <div id="detailBox">

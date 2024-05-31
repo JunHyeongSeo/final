@@ -220,7 +220,7 @@
         <div id="content">
             <img class="icon-Img" src="resources/image/mypageIcon.png">
 
-            <div id="titleBox">문의내역</div>
+            <div id="titleBox">글 상세보기</div>
             <div id="detailBox">
                 <div id="categoryBox">
                     <h5>선택</h5>
