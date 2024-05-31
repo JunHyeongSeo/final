@@ -250,9 +250,9 @@
         <div class="detail_top">
             <a>${companion.courseName}</a>/
             <a>동행 날짜 : ${companion.companionDate}</a>/
-            <a>인원 : ${companion.companionNum+1} / ${companion.companionPeople}
+            <a>인원 : ${companion.companionNum} / ${companion.companionPeople}
             [<c:choose>
-            	<c:when test="${companion.companionNum+1 ge companion.companionPeople or companion.nowStatus == '마감'}">마감</c:when>
+            	<c:when test="${companion.companionNum ge companion.companionPeople or companion.nowStatus == '마감'}">마감</c:when>
             	<c:otherwise>모집중</c:otherwise>
             </c:choose>]</a>
         </div>
@@ -273,7 +273,7 @@
 
             <div class="detail_box_right"> <!-- 버튼 감싸는 div -->
 	            <c:choose>
-	            	<c:when test="${companion.companionNum+1 ge companion.companionPeople or companion.nowStatus == '마감'}">
+	            	<c:when test="${companion.companionNum ge companion.companionPeople or companion.nowStatus == '마감'}">
 	                	<div class="detail_right_btn">
 	                		<button class="detail_btn" disabled style="background-color: grey;">마감</button>
 	                	</div>
@@ -325,7 +325,7 @@
             <a class="hdmy_detail_btn detailBtn">목록</a>
             <c:if test="${sessionScope.loginUser.userNo == companion.userNo}">
             	<c:choose>
-	            	<c:when test="${companion.companionNum+1 ge companion.companionPeople or companion.nowStatus == '마감'}">
+	            	<c:when test="${companion.companionNum ge companion.companionPeople or companion.nowStatus == '마감'}">
 		            	<button class="hdmy_detail_btn" onclick="endAlert();">수정</button>
 	            	</c:when>
 	            	<c:otherwise>

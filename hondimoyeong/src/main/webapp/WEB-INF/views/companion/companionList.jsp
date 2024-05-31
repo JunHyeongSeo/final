@@ -335,9 +335,9 @@
 		                            	</c:otherwise>
 		                            </c:choose>
 		                            <td class="hdmy-table_small">${companion.userName}</td>
-		                            <td class="hdmy-table_small">${companion.companionNum+1} / ${companion.companionPeople}</td>
+		                            <td class="hdmy-table_small">${companion.companionNum} / ${companion.companionPeople}</td>
 		                            <c:choose>
-		                            	<c:when test="${companion.companionNum+1 ge companion.companionPeople or companion.nowStatus == '마감'}">
+		                            	<c:when test="${companion.companionNum ge companion.companionPeople or companion.nowStatus == '마감'}">
 		                            		<td class="hdmy-table_status" style="color: #292929;">마감</td>
 		                            	</c:when>
 		                            	<c:otherwise>

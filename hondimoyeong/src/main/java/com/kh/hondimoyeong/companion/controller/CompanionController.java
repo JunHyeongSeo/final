@@ -34,6 +34,11 @@ public class CompanionController {
 	@Autowired
 	private CompanionService companionService;
 	
+	@GetMapping("test")
+	public String test() {
+		return "companion/smarteditorTest";
+	}
+	
 	@GetMapping("companion")
 	public String selectAll(@RequestParam(value="page", defaultValue="1") int page, Model model) {
 		

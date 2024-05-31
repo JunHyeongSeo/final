@@ -10,7 +10,7 @@
 		<result column="USER_NO" property="userNo"/>
 		<result column="USER_NAME" property="userName"/>
 		<result column="COURSE_NO" property="courseNo"/>
-		<result column="COURSE_NANE" property="courseName"/>
+		<result column="COURSE_NAME" property="courseName"/>
 		<result column="COMPANION_DATE" property="companionDate"/>
 		<result column="COMPANION_TITLE" property="companionTitle"/>
 		<result column="COMPANION_CONTENT" property="companionContent"/>
@@ -72,7 +72,7 @@
 		SELECT
 		      A.COMPANION_NO AS COMPANION_NO,
 		      M.USER_NAME,
-		      C.COURSE_NO AS COURSE_NANE,
+		      C.COURSE_NO AS COURSE_NAME,
 		      TO_CHAR(A.COMPANION_DATE, 'YY.MM.DD (DY)') AS COMPANION_DATE,
 		      A.COMPANION_TITLE,
 		      A.COMPANION_CONTENT,
@@ -86,7 +86,7 @@
 		      		 COMPANION_REPLY CR
 		        WHERE
 		       	     A.COMPANION_NO = CR.COMPANION_NO) AS REPLY_COUNT,
-		      COUNT(CASE WHEN B.STATUS = 'A' THEN B.USER_NO END) AS COMPANION_NUM,
+		      COUNT(CASE WHEN B.STATUS = 'A' THEN B.USER_NO END) + 1 AS COMPANION_NUM,
 		      DECODE(SIGN(A.COMPANION_DATE - SYSDATE), -1, '마감', '모집 중') AS NOW_STATUS
 		  FROM
 		      COMPANION A
@@ -125,7 +125,7 @@
 		      SELECT
 		      A.COMPANION_NO,
 		      A.COMPANION_PEOPLE,
-		      COUNT(B.USER_NO) AS COMPANION_NUM,
+		      COUNT(CASE WHEN B.STATUS = 'A' THEN B.USER_NO END) + 1 AS COMPANION_NUM,
 		      DECODE(SIGN(A.COMPANION_DATE - SYSDATE), -1, '마감', '모집 중') AS NOW_STATUS
 		  FROM
 		      COMPANION A
@@ -150,7 +150,7 @@
 		SELECT
 		      A.COMPANION_NO AS COMPANION_NO,
 		      M.USER_NAME,
-		      C.COURSE_NO AS COURSE_NANE,
+		      C.COURSE_NO AS COURSE_NAME,
 		      TO_CHAR(A.COMPANION_DATE, 'YY.MM.DD (DY)') AS COMPANION_DATE,
 		      A.COMPANION_TITLE,
 		      A.COMPANION_CONTENT,
@@ -164,7 +164,7 @@
 		      	 	 COMPANION_REPLY CR
 		      	WHERE 
 		      		 A.COMPANION_NO = CR.COMPANION_NO) AS REPLY_COUNT,
-		      COUNT(CASE WHEN B.STATUS = 'A' THEN B.USER_NO END) AS COMPANION_NUM,
+		      COUNT(CASE WHEN B.STATUS = 'A' THEN B.USER_NO END) + 1 AS COMPANION_NUM,
 		      DECODE(SIGN(A.COMPANION_DATE - SYSDATE), -1, '마감', '모집 중') AS NOW_STATUS
 		  FROM
 		      COMPANION A
@@ -204,7 +204,7 @@
 		      M.USER_NO,
 		      M.USER_NAME,
 		      C.COURSE_INDEX AS COURSE_NO,
-		      C.COURSE_NO AS COURSE_NANE,
+		      C.COURSE_NO AS COURSE_NAME,
 		      TO_CHAR(A.COMPANION_DATE, 'YY.MM.DD') AS COMPANION_DATE,
 		      A.COMPANION_TITLE,
 		      A.COMPANION_CONTENT,
@@ -212,7 +212,7 @@
 		      A.COUNT,
 		      A.STATUS AS STATUS,
 		      A.COMPANION_PEOPLE,
-		      COUNT(CASE WHEN B.STATUS = 'A' THEN B.USER_NO END) AS COMPANION_NUM,
+		      COUNT(CASE WHEN B.STATUS = 'A' THEN B.USER_NO END) + 1 AS COMPANION_NUM,
 		      CHANGE_NAME AS ROUTE_IMG,
 		      DECODE(SIGN(A.COMPANION_DATE - SYSDATE), -1, '마감', '모집 중') AS NOW_STATUS
 		  FROM
@@ -319,28 +319,28 @@
 	
 	<select id="search" parameterType="map" resultMap="companionResultSet">
 		SELECT
-		      A.COMPANION_NO AS COMPANION_NO,
-		      M.USER_NAME,
-		      C.COURSE_NO AS COURSE_NANE,
-		      TO_CHAR(A.COMPANION_DATE, 'YY.MM.DD (DY)') AS COMPANION_DATE,
-		      A.COMPANION_TITLE,
-		      A.COMPANION_CONTENT,
-		      TO_CHAR (A.CREATE_DATE, 'YY/MM/DD') AS CREATE_DATE,
-		      A.COUNT,
-		      A.STATUS AS STATUS,
-		      A.COMPANION_PEOPLE,
-		      COUNT(B.USER_NO) AS COMPANION_NUM
-		  FROM
-		      COMPANION A
-		  JOIN
-		      COURSE C ON (A.COURSE_NO = C.COURSE_INDEX)
-		  JOIN
-		      MEMBER M USING (USER_NO)
-		  LEFT
-		  JOIN
-		      COMPANION_BRIDGE B ON (A.COMPANION_NO = B.COMPANION_NO)
-		 WHERE
-		      A.STATUS = 'Y'
+		    A.COMPANION_NO AS COMPANION_NO,
+		    M.USER_NAME,
+		    C.COURSE_NO AS COURSE_NAME,
+		    TO_CHAR(A.COMPANION_DATE, 'YY.MM.DD (DY)') AS COMPANION_DATE,
+		    DECODE(SIGN(A.COMPANION_DATE - SYSDATE), -1, '마감', '모집 중') AS NOW_STATUS,
+		    A.COMPANION_TITLE,
+		    A.COMPANION_CONTENT,
+		    TO_CHAR(A.CREATE_DATE, 'YY/MM/DD') AS CREATE_DATE,
+		    A.COUNT,
+		    A.STATUS AS STATUS,
+		    A.COMPANION_PEOPLE,
+		    COUNT(CASE WHEN B.STATUS = 'A' THEN B.USER_NO END) + 1 AS COMPANION_NUM
+		FROM
+		    COMPANION A
+		JOIN
+		    COURSE C ON (A.COURSE_NO = C.COURSE_INDEX)
+		JOIN
+		    MEMBER M ON (M.USER_NO = A.USER_NO)
+		LEFT JOIN
+		    COMPANION_BRIDGE B ON (A.COMPANION_NO = B.COMPANION_NO)
+		WHERE
+		    A.STATUS = 'Y'
 		 <if test="condition == 'title'">
 		   AND COMPANION_TITLE 
 		 </if>
@@ -348,22 +348,19 @@
 		   AND C.COURSE_NO 
 		 </if>
 		  LIKE '%' || #{keyword} || '%'
-		 
-		 GROUP
-		    BY
-		      A.COMPANION_NO,
-		      M.USER_NAME,
-		      C.COURSE_NO,
-		      A.COMPANION_DATE,
-		      A.COMPANION_TITLE,
-		      A.COMPANION_CONTENT,
-		      A.CREATE_DATE,
-		      A.COUNT,
-		      A.STATUS,
-		      A.COMPANION_PEOPLE
-		ORDER
-		   BY
-		     A.COMPANION_DATE DESC
+		GROUP BY
+		    A.COMPANION_NO,
+		    M.USER_NAME,
+		    C.COURSE_NO,
+		    A.COMPANION_DATE,
+		    A.COMPANION_TITLE,
+		    A.COMPANION_CONTENT,
+		    A.CREATE_DATE,
+		    A.COUNT,
+		    A.STATUS,
+		    A.COMPANION_PEOPLE
+		ORDER BY
+		    A.COMPANION_DATE DESC
 	</select>
 	
 	<select id="selectReply" resultMap="companionReplyResultSet" parameterType="_int">
