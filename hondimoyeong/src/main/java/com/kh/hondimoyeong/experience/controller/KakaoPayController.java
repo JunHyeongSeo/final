@@ -31,16 +31,8 @@ public class KakaoPayController {
 	@Autowired
 	private  ReserveService reserveService;
 	
-	
 	private KakaoPayVo kakaopayVo;
 	
-	
-	@GetMapping("kakaop")
-	public String kakaop() {
-		return "experience/kakaop";
-		
-		
-	}
 	
 	@PostMapping("kakaoPay")
     public String kakaoPay(Experience experience, Model model, HttpSession session){
@@ -54,16 +46,11 @@ public class KakaoPayController {
 		experience.setUserId(userId);
 		experience.setUserName(userName);
         
-        System.out.println(experience);
-        
 		// INSERT
         reserveService.insertReserve(experience);
         
         //SESLECT
         Experience ex = reserveService.findEx();
-        System.out.println("ex : " + ex);
-        
-        
         
 		model.addAttribute("Experience", ex);
         
@@ -75,28 +62,14 @@ public class KakaoPayController {
         log.info("kakaoPay Success get................");
         log.info("kakaoPaySuccess pg_token : " + pg_token);
         
-        
-        System.out.println("컨트롤 ex 2 " + session.getAttribute("experience"));
-
         Experience experience =  (Experience) session.getAttribute("experience");
-        
         
         model.addAttribute("pg_token", pg_token);
         
         kakaopayVo = kakaoPay.kakaopayVo(pg_token, experience);
         
-        System.out.println(kakaopayVo);
-        
         model.addAttribute("info", kakaopayVo);
-        
         
         return "experience/kakaoSuccess";
     }
-	
-	
-	
-	
-	
-	
-
 }

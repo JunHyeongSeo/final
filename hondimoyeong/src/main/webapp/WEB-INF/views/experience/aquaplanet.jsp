@@ -17,7 +17,6 @@
 	width:1200px;
 	height : 1200px;
 	margin : auto;
-	border:1px solid green;
 	
 }
 
@@ -30,17 +29,15 @@
 	margins-top : 20px;
 	boardere-radius : 20px;
 	background-size : contain;
-	border:1px solid blue;
 	
 }
 #mainimg{
  	text-align: center;
 	margin : auto;
-	margin-top:150px;
+	padding-top:150px;
 	width:40%;
-	height:50%;
+	height:75%;
 	
-  	border: 1px solid red;
 }
 #main1{
 	padding-top:20px;

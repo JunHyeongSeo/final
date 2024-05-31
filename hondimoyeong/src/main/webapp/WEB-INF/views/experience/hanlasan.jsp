@@ -18,7 +18,6 @@
 	width:1200px;
 	height : 1200px;
 	margin : auto;
-	border:1px solid green;
 	
 }
 
@@ -28,20 +27,18 @@
 	background-image : url('resources/image/한라산.webp');
 	background-repeat : no-repeat;
 	margin : auto;
-	margins-top : 20px;
+	margin-top : 20px;
 	boardere-radius : 20px;
 	background-size : contain;
-	border:1px solid blue;
 }
 
 #mainimg{
  	text-align: center;
 	margin : auto;
-	margin-top:200px;
+	padding-top:200px;
 	width:40%;
-	height:50%;
+	height:75%;
 	
-  	border: 1px solid red;
 }
 #main1{
 	padding-top:20px;

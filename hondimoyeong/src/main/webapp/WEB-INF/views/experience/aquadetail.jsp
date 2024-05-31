@@ -7,27 +7,24 @@
 <title>Insert title here</title>
 <style>
 	#businesstime{
-		border:1px solid red;
 		text-align: center;
 		width:1200px;
 		height:100%;
 		margin:auto;
 	}
 	#business1{
-		border:1px solid red;
 		width:100%;
 		height:30%;
 		margin:auto;
 	}
 	#business2{
-		border:1px solid red;
+		padding-top:10px;
 		width:100%;
 		height:30%;
 		margin:auto;
 	}
 	
 	#business3{
-		border:1px solid red;
 		width:100%;
 		height:20%;
 		margin:auto;
@@ -38,7 +35,6 @@
 		margin:auto;
 	}
 	table, th, td{
-		border:1px solid #222;
 		border-collapse : collapse;
 	}
 	th{

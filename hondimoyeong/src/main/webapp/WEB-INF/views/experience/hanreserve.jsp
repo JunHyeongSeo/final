@@ -14,30 +14,22 @@
    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     
 <style>
-
-
 #table{
 	width:1200px;
 	height:800px;
 	margin:auto;
 }
-
-
-
-   
-
 </style>
     
 </head>
 <body>
-
 	<jsp:include page ="../common/header.jsp" />
 	
 	<div class="table" id="table">
 	
 		<form method="post" action="hanlasanreserve">
 	
-                    <table>
+        <table>
            <colgroup>
                <col style="width:25%;">
            </colgroup>
@@ -53,12 +45,9 @@
                         	<option value="관음사 코스">관음사 코스</option>
                        </select>
 						<input id="course" type="hidden" name="experienceDivide" value=""><!-- 1 -->
-                       
                        </div>
-                      <!-- <a href="#" class="btn btn-black" data-toggle="modal" data-target="#tambang_info" title="자세히 보기" onclick="detailView();return false;">자세히 보기</a>-->
                    </div>
                </td>
-
            </tr>
            <tr>
                <th>탐방날짜</th>
@@ -66,7 +55,6 @@
                    <div class="form-group input_wrap_row">
 						<input type="date" name="experienceDate" id="Date"><!-- 2 -->
                    </div>
-                  
                </td>
            </tr>
            <tr>
@@ -83,13 +71,9 @@
                  <input type="hidden" name="price" id="price" value="0"><!-- 4 -->
                  
                 </div>
-                
-               	 <div>
-                   	 (탐방 예약 시간이 지나면 예약부도 처리 됩니다)
-                   </div>
+               	 <div>(탐방 예약 시간이 지나면 예약부도 처리 됩니다)</div>
                </td>
            </tr>        
-           
 		<c:choose>
 			<c:when test="${ empty sessionScope.loginUser}"><br>
 
@@ -135,12 +119,10 @@
                    </ul>
                </td>
            </tr>
-           
            </tbody>
            
        </table>
 		<input type="hidden" id="category" name="category" value="한라산"><!-- 6 -->
-       
        
       <c:choose>
 		<c:when test="${ empty sessionScope.loginUser}"><br>
@@ -154,12 +136,6 @@
 	</c:choose>
 	</form>
    </div>
-                    
-	
-	
-	
-	
-	
 	
 	<script>
 	var now_utc = Date.now() // 지금 날짜를 밀리초로
@@ -172,10 +148,6 @@
 	function btn(){
 		
 		var dateString = $("#Date").val();
-		console.log(dateString);
-		console.log($('#courseSeq').children('option:selected').text());
-		console.log($("#visitTm").children('option:selected').text());
-		console.log($('#cmpaCnt').children('option:selected').text());
 		
 		course = $('#courseSeq').children('option:selected').text();
 		$('#courseSeq').children('option:selected').text(course);
@@ -186,35 +158,13 @@
 		people = $('#cmpaCnt').children('option:selected').text();
 		$('#cmpaCnt').children('option:selected').text(people);
 		
-		
-		
 		$('#course').val(course);
-		console.log($('#course').val());
 		
 		$('#time').val(time);
-		console.log($('#time').val())
 		
 		$('#person1-val').val(people);
-		console.log($('#person1-val').val());
-		
-		
 	}
 		
-		
-	
-	
-
-
-
-	
-		
-		
-	
-	
-	
-	
-	
-	
 	</script>
 
 	<jsp:include page ="../common/footer.jsp" />

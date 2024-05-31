@@ -30,12 +30,10 @@ public class TangerineController {
 		if(!(session.getAttribute("loginUser")== null)) {
 			
 			int userNo = ((Member)session.getAttribute("loginUser")).getUserNo();
-			//System.out.println(userNo);
 			
 			
 			if(userNo > 0) {
 				List<Experience> experience = reserveService.excheck(userNo);
-				System.out.println(experience);
 				
 				if(!(experience == null)) {
 					session.setAttribute("experience", experience);
@@ -64,7 +62,6 @@ public class TangerineController {
 	@PostMapping("exreviewg")
 	public String exriview(Exreview exreview, HttpSession session) {
 		
-		System.out.println("쓴리뷰" + exreview);
 		
 		int experienceNo = ((List<Experience>)session.getAttribute("experience")).get(0).getExperienceNo();
 		

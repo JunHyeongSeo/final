@@ -380,5 +380,9 @@
 		 WHERE
 		      REVIEW_NO = #{reviewNo} 
 	</update>
+	
+	<delete id="deleteImg" parameterType="_int">
+		DELETE FROM REVIEW_IMG WHERE REVIEW_NO = #{reviewNo}
+	</delete>
 
 </mapper>

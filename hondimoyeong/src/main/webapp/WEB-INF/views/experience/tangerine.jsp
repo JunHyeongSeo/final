@@ -16,7 +16,6 @@
 	width:1200px;
 	height : 1800px;
 	margin : auto;
-	border:1px solid green;
 	
 }
 #gul{
@@ -25,17 +24,16 @@
 	background-image : url('resources/image/gul.png');
 	background-repeat : no-repeat;
 	margin : auto;
-	margins-top : 20px;
+	margin-top : 20px;
 	boardere-radius : 20px;
 	background-size : contain;
-	border:1px solid blue;
 }
 
 
 #mainimg{
  	text-align: center;
 	margin-left : 40px; ;
-	margin-top:310px;
+	padding-top:310px;
 	width:20%;
 	height:7%;
 }
