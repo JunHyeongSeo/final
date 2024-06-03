@@ -13,9 +13,7 @@ import lombok.RequiredArgsConstructor;
 @Controller
 @RequiredArgsConstructor
 public class CourseController {
-	
-	private String serviceKey = "8fb9d532bba6f497bc125efc82a1127e";
-	
+
 	private final CourseService courseService;
 	
 	@GetMapping("courses")

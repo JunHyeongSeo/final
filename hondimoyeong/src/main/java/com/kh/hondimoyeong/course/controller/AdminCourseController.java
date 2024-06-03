@@ -46,12 +46,12 @@ public class AdminCourseController {
 	}
 	
 	@GetMapping("/update/{courseIndex}")
-	public String courseUpdateForm(@PathVariable int courseIndex,
-									Model model) {
+	public ModelAndView courseUpdateForm(@PathVariable int courseIndex,
+										 ModelAndView mv) {
 		
-		model.addAttribute("course", courseService.courseDetail(courseIndex));
+		mv.addObject("course", courseService.courseDetail(courseIndex)).setViewName("admin/course/courseUpdateForm");
 		
-		return "admin/course/courseUpdateForm";
+		return mv;
 	}
 	
 	@PostMapping("/update/updateCourse")
