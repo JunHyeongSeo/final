@@ -95,6 +95,8 @@
 		     COMPANION_BRIDGE B ON (P.COMPANION_NO = B.COMPANION_NO)
 		WHERE
 		     B.USER_NO = #{userNo}
+		  AND
+		  	 P.STATUS = 'Y'    
      		   
 	</select>
 	
@@ -132,10 +134,14 @@
 		          USER_NO = #{userNo}
 		      AND
 		          STATUS = 'W') A ON (B.COMPANION_NO = A.COMPANION_NO)
+         JOIN
+         	 COMPANION C ON (B.COMPANION_NO = C.COMPANION_NO)
 		WHERE
 		     B.STATUS NOT IN 'W'
 	     AND
-	        B.COMPANION_NO = #{companionNo}
+	         B.COMPANION_NO = #{companionNo}
+	     AND
+	         C.STATUS = 'Y'
 	</select>
 	
 	<select id="alram" parameterType="_int" resultType="_int">

@@ -16,6 +16,10 @@ import javax.servlet.http.HttpServletResponse;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.context.annotation.PropertySources;
+import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,17 +29,21 @@ import com.kh.hondimoyeong.course.model.vo.Course;
 
 import lombok.RequiredArgsConstructor;
 
+@PropertySources(@PropertySource("classpath:config.properties"))
 @Controller
 @RequiredArgsConstructor
 public class CourseApiController {
 	
 	private final CourseServiceImpl courseService;
+	
+	@Autowired
+	private Environment env;
 
 	@GetMapping("admin/api/load")
 	public String loadFromApi(Model model,
 							  HttpServletResponse response) throws IOException, Exception {
 		
-		String address = "https://api.odcloud.kr/api/15043496/v1/uddi:4fc81f72-5343-4349-93f0-bda60947a923?page=0&perPage=0&returnType=json&serviceKey=V0N5aQoZi3yLUcXkXnicH4TSv4Q%2FJzLOdTPypUpxnL%2Be5yHYcfOJ%2Bma4N21DA6YHMpluBbtS9XXsJR%2BOeYe1lw%3D%3D";
+		String address = "https://api.odcloud.kr/api/15043496/v1/uddi:4fc81f72-5343-4349-93f0-bda60947a923?page=0&perPage=0&returnType=json&serviceKey=" + env.getProperty("courseApiServiceKey");
 		
 		URL url = new URL(address);
 		
@@ -53,12 +61,10 @@ public class CourseApiController {
 		JSONArray jsonArray = (JSONArray)jsonObj.get("data");
 		
 		List<Course> list = new ArrayList<Course>();
-		String recentTime = "";
 				
+		
 		for(int i = 0; i < jsonArray.size(); i++) {
-			JSONObject object = (JSONObject)jsonArray.get(i);
-			recentTime = (String)object.get("데이터기준일자");
-			
+			JSONObject object = (JSONObject)jsonArray.get(i);		
 			Course course = new Course();
 			course.setCourseNo((String)object.get("코스별"));
 			course.setCourseName((String)object.get("코스명"));
@@ -70,6 +76,7 @@ public class CourseApiController {
 		
 		courseService.loadFromApi(list);
 		timeCookie(response);
+		
 		
 		return "redirect:/admin/course";
 	}
