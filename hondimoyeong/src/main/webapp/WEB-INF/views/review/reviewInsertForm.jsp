@@ -241,6 +241,21 @@
     	 function backPage(){
     		 location.href = '${path}/review';
     	 }
+    	 
+   	    document.getElementById('myform').addEventListener('submit', function(event) {
+   	        var radios = document.getElementsByName('reviewStar');
+   	        var checked = false;
+   	        for (var i = 0; i < radios.length; i++) {
+   	            if (radios[i].checked) {
+   	                checked = true;
+   	                break;
+   	            }
+   	        }
+   	        if (!checked) {
+   	            event.preventDefault();
+   	            alert('별점을 선택해주세요.');
+   	        }
+   	    });
     </script>
 
 </body>
