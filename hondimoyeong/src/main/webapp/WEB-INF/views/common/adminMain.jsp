@@ -33,14 +33,9 @@ th{
 </head>
 <body>
 
-
-
-			<jsp:include page="adminHeader.jsp"/>
+<jsp:include page="adminHeader.jsp"/>
 		
-		
-	
-<div id="all">
-
+	<div id="all">
 
 	<h2>관리자페이지</h2><br>
 	<h4>결제 내역</h4>
@@ -70,8 +65,8 @@ th{
     </table>
 	 
 	<div id="area"></div>
-	<div id="pagingArea">
-	<ul class="pagination">
+		<div id="pagingArea">
+		<ul class="pagination">
                 	<c:choose>
                 		<c:when test="${ pageInfo.currentPage eq 1 }">
                 		    <li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>
@@ -99,13 +94,11 @@ th{
                     		</a>
                     	</c:otherwise>
                     </c:choose>
-                    
                 </ul>
-                 <a>${ex.experienceNo }</a>
                
-	</div>
+		</div>
 	
-</div>
+	</div>
 
 <div>
 

@@ -335,8 +335,9 @@
 		function insertReview(){
 			location.href = '${ path }/insertForm.rvw';
 		}
+		
 		// 별점
-		document.addEventListener("DOMContentLoaded", function () {
+		document.addEventListener("DOMContentLoaded", () => {
 		    var starContainers = document.querySelectorAll('.box_star');
 		    starContainers.forEach(function (container) {
 		        var rating = container.getAttribute('data-rating');

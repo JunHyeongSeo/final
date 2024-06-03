@@ -17,7 +17,7 @@
 
         #innerOuter{
             width: 1000px;
-            height: 800px;
+            height: 1000px;
             margin: auto;
         }
 
@@ -33,7 +33,6 @@
         }
 
         table{
-            border : 1px solid red;
             margin: auto;
             margin-top : 20px;
         }
@@ -110,7 +109,7 @@
 	            <tr>
 	                <td class="part">코스설명</td>
 	                <td class="infomation" colspan="5">
-	                	<textarea name="content" rows="4" cols="50">${course.content}</textarea>
+	                	<textarea name="content" rows="20" cols="120">${course.content}</textarea>
 	                
 	                </td>
 	            </tr>
