@@ -283,9 +283,12 @@
 		                	<c:when test="${empty loginUser}">
 			                	<button class="detail_btn" onclick="noConnect();">신청하기</button>
 		                	</c:when>
+		                	
 		                	<c:when test="${sessionScope.loginUser.userNo eq companion.userNo }">
 			                	<button class="detail_btn" onclick="userNoAlert();">신청하기</button>
 		                	</c:when>
+		                	
+		                	
 		                	<c:otherwise>
 			                	<button class="detail_btn" onclick="connect();">신청하기</button>
 		                	</c:otherwise>
@@ -327,7 +330,7 @@
             <a class="hdmy_detail_btn detailBtn">목록</a>
             <c:if test="${sessionScope.loginUser.userNo == companion.userNo}">
             	<c:choose>
-	            	<c:when test="${companion.companionNum ge companion.companionPeople or companion.nowStatus == '마감'}">
+	            	<c:when test="${companion.nowStatus == '마감'}">
 		            	<button class="hdmy_detail_btn" onclick="endAlert();">수정</button>
 	            	</c:when>
 	            	<c:otherwise>
@@ -448,6 +451,7 @@
 	function userNoAlert(){
 		alert('본인의 신청글엔 신청이 불가능 합니다.');
 	}
+	
 	</script>
 
 
