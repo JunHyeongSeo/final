@@ -6,6 +6,10 @@ import java.net.URLEncoder;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.context.annotation.PropertySources;
+import org.springframework.core.env.Environment;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -15,20 +19,20 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.client.RestTemplate;
 
-import lombok.RequiredArgsConstructor;
-
+@PropertySources(@PropertySource("classpath:config.properties"))
 @Controller
 public class AjaxCourseMapController {
 	
-	private String restApiKey = "d824f9be96e65ddd8c317aa97d8d3921";
+	@Autowired
+	private Environment env;
 	
 	@GetMapping(value="courseMap", produces="application/json; charset=UTF-8")
 	@ResponseBody
 	public String MapData(String query) throws Exception  {
-		
+
 		//헤더
 		HttpHeaders header = new HttpHeaders();
-		header.add("Authorization", "KakaoAK " + restApiKey);
+		header.add("Authorization", "KakaoAK " + env.getProperty("restApiKey"));
 		
 		//키워드 인코딩
 		String encode = URLEncoder.encode(query,"UTF-8");
