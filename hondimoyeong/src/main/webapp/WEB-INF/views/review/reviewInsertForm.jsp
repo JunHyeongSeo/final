@@ -215,7 +215,7 @@
 		                            </td>
 								</tr>
 		                        <tr>
-									<th>* 첨부  파일</th>
+									<th>* 첨부파일</th>
 									<td>
 										<input type="file" name="upfiles1" id="upfiles1" style="padding-right: 35px;"> <span class="file_label">* 썸네일로 등록 되는 이미지 입니다.</span>
 		                            </td>

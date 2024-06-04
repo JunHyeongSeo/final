@@ -337,7 +337,7 @@
 		                            <td class="hdmy-table_small">${companion.userName}</td>
 		                            <td class="hdmy-table_small">${companion.companionNum} / ${companion.companionPeople}</td>
 		                            <c:choose>
-		                            	<c:when test="${companion.companionNum ge companion.companionPeople or companion.nowStatus == '마감'}">
+		                            	<c:when test="${companion.nowStatus == '마감'}">
 		                            		<td class="hdmy-table_status" style="color: #292929;">마감</td>
 		                            	</c:when>
 		                            	<c:otherwise>
@@ -417,8 +417,8 @@
 			location.href = '${ path }/enrollForm.cmp';
 		}
 		
-		$(function(){
-		    $(document).on('click', '.sortCompanion', function(){
+		$(() => {
+		    $(document).on('click', '.sortCompanion', () => {
 		        $.ajax({
 		            url: 'companions',
 		            type: 'get',
