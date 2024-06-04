@@ -31,7 +31,10 @@ import com.kh.hondimoyeong.review.model.vo.Review;
 import com.kh.hondimoyeong.review.model.vo.ReviewComment;
 import com.kh.hondimoyeong.review.model.vo.ReviewImg;
 
+import lombok.RequiredArgsConstructor;
+
 @Controller
+@RequiredArgsConstructor
 public class ReviewController {
 	
 	@Autowired
@@ -100,7 +103,7 @@ public class ReviewController {
 		return "review/reviewInsertForm";
 	}
 	
-	@RequestMapping("insert.rvw")
+	@PostMapping("insert.rvw")
 	public String insert(@ModelAttribute Review review,
 	                     @RequestParam("upfiles1") MultipartFile[] upfiles1,
 	                     @RequestParam("upfiles2") MultipartFile[] upfiles2,
@@ -110,25 +113,26 @@ public class ReviewController {
 	    reviewService.insert(review);
 	    int reviewNo = review.getReviewNo();
 	    
-	    if (reviewNo > 0) { // 리뷰가 등록 될 경우
+	    if (reviewNo > 0) { 
 	        List<MultipartFile> allFiles = new ArrayList<MultipartFile>();
 	        
-	        // 첫 번째 파일들의 파일 레벨은 1로 설정
+	        // 첫 번째 파일들의 파일 레벨은 1
 	        for (MultipartFile file : upfiles1) {
 	            if (!file.isEmpty()) {
 	                allFiles.add(file);
 	            }
 	        }
 	        
-	        // 두 번째 파일들의 파일 레벨은 2로 설정
+	        // 두 번째 파일들의 파일 레벨은 2
 	        for (MultipartFile file : upfiles2) {
 	            if (!file.isEmpty()) {
 	                allFiles.add(file);
 	            }
 	        }
 	        
-	        for (int i = 0; i < allFiles.size(); i++) {
-	            MultipartFile upfile = allFiles.get(i);
+	        int fileLevel = 1;
+	        
+	        for (MultipartFile upfile : allFiles) {
 	            String originalFilename = upfile.getOriginalFilename();
 	            String changeName = saveFile(upfile, session);
 	            
@@ -139,15 +143,14 @@ public class ReviewController {
 	            reviewImg.setChangeName(changeName);
 	            
 	            // 파일 레벨 설정
-	            if (i < upfiles1.length) {
-	                reviewImg.setFileLevel(1); // 첫 번째 파일들의 파일 레벨은 1
-	            } else {
-	                reviewImg.setFileLevel(2); // 두 번째 파일들의 파일 레벨은 2
+	            if (allFiles.size() == upfiles2.length && fileLevel == 1) {
+	                fileLevel = 2;
+	                // 두 번째 파일이 업로드되었을 때 파일 레벨 2
 	            }
-	            
+	            reviewImg.setFileLevel(fileLevel); // 파일 레벨 설정
 	            reviewService.insertImg(reviewImg);
 	        }
-	        
+
 	        session.setAttribute("alertMsg", "게시글 작성 성공!");
 	        return "redirect:review";
 	    } else { 
@@ -155,6 +158,8 @@ public class ReviewController {
 	        return "common/errorPage";
 	    }
 	}
+
+
 	
 	@RequestMapping("update.rvw")
 	public String update(@ModelAttribute Review review,
