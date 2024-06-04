@@ -41,6 +41,7 @@
 	
 }
 #main1{
+	padding : 10px 10px 10px 10px ;
 	padding-top:20px;
 	height:65%;
 	background-color: #FFE880;
@@ -91,8 +92,8 @@
 				<div id="main1">
 					<h3>한라산</h3><br>
 					<b>
-					제주도에 위치한 남한에서 가장 높은산(해발 1947m)이자 대한민국의 가장 높은 국립공원이다. <br>
-					국립공원 전역이 유네스코 세계유산으로 지정되었다. 금강산, 지리산과 함께 대한민국 삼신산 중 하나로 꼽힌다. <br>
+					제주도에 위치한 남한에서 가장 높은산(해발 1947m)이자 <br> 대한민국의 가장 높은 국립공원이다. <br>
+					국립공원 전역이 유네스코 세계유산으로 지정되었다.<br> 금강산, 지리산과 함께 대한민국 삼신산 중 하나로 꼽힌다. <br>
 					</b>
 					
 					<a class="btn btn-outline-primary" style="margin-top:15px" href="handetail">자세히보기</a>
