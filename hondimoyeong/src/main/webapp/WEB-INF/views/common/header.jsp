@@ -220,7 +220,7 @@
                     <li><a href="${path}/companion">혼디모영</a></li>
                     <li><a href="#">프로그램</a>
                         <ul class="submenu"  style="padding-top: 20px;">
-                            <li><a href="${path}/tangerine">귤따기 체험</a></li>
+                            <li><a href="${path}/tangerine">감귤 체험</a></li>
                             <li><a href="${path}/hanlasan">한라산 예약</a></li>
                             <li><a href="${path}/aqua">아쿠아플라넷 예약</a></li>
                         </ul>
