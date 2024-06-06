@@ -331,13 +331,13 @@
 		                            		<td>${companion.companionTitle}</td>
 		                            	</c:when>
 		                            	<c:otherwise>
-				                            <td>${ companion.companionTitle} <a class="commentCount">[${companion.replyCount}]</a><a id="test"></a></td>
+				                            <td>${ companion.companionTitle} <a class="commentCount">[${companion.replyCount}]</a></td>
 		                            	</c:otherwise>
 		                            </c:choose>
 		                            <td class="hdmy-table_small">${companion.userName}</td>
 		                            <td class="hdmy-table_small">${companion.companionNum} / ${companion.companionPeople}</td>
 		                            <c:choose>
-		                            	<c:when test="${companion.nowStatus == '마감'}">
+		                            	<c:when test="${companion.nowStatus == '마감' or companion.companionPeople eq companion.companionNum}">
 		                            		<td class="hdmy-table_status" style="color: #292929;">마감</td>
 		                            	</c:when>
 		                            	<c:otherwise>
