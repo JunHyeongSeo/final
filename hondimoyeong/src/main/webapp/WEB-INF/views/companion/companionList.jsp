@@ -188,10 +188,18 @@
         text-align: center;
     }
 
-    .hdmy-table_status{
+    .hdmy-table_status1{
         width: 90px;
         text-align: center;
         font-weight: bold;
+        color: #292929;
+    }
+    
+    .hdmy-table_status2{
+        width: 90px;
+        text-align: center;
+        font-weight: bold;
+        color: #FF9843;
     }
 
     .hdmy-table_mid{
@@ -331,17 +339,17 @@
 		                            		<td>${companion.companionTitle}</td>
 		                            	</c:when>
 		                            	<c:otherwise>
-				                            <td>${ companion.companionTitle} <a class="commentCount">[${companion.replyCount}]</a></td>
+				                            <td>${ companion.companionTitle} <a class="commentCount">[${companion.replyCount}]</a><a id="test"></a></td>
 		                            	</c:otherwise>
 		                            </c:choose>
 		                            <td class="hdmy-table_small">${companion.userName}</td>
 		                            <td class="hdmy-table_small">${companion.companionNum} / ${companion.companionPeople}</td>
 		                            <c:choose>
 		                            	<c:when test="${companion.nowStatus == '마감' or companion.companionPeople eq companion.companionNum}">
-		                            		<td class="hdmy-table_status" style="color: #292929;">마감</td>
+		                            		<td class="hdmy-table_status1">마감</td>
 		                            	</c:when>
 		                            	<c:otherwise>
-		                            		<td class="hdmy-table_status" style="color: #FF9843;">모집 중</td>
+		                            		<td class="hdmy-table_status2">모집 중</td>
 		                            	</c:otherwise>
 		                            </c:choose>
 		                            <td class="hdmy-table_small">${ companion.count}</td>
@@ -434,7 +442,7 @@
 		                           + '<td>' + result[i].companionTitle +'</td>'
 		                           + '<td class="hdmy-table_small">' + result[i].userName +'</td>'
 		                           + '<td class="hdmy-table_small">' + result[i].companionNum + '/' + result[i].companionPeople + '</td>'
-		                           + '<td class="hdmy-table_status" style="color: #FF9843"> 모집중 </td>'
+		                           + '<td class="hdmy-table_status2"> 모집중 </td>'
 		                           + '</tr>';
 		                }
 		                $('.table-hover tbody').append(value);
