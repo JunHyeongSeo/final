@@ -28,4 +28,5 @@ public interface CourseMapper {
 	
 	List<Course> userCourse(int userNo);
 	
+	int allCourse();
 }

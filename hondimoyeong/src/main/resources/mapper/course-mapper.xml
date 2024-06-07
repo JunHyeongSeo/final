@@ -25,6 +25,12 @@
 		<result column="FILE_LEVEL" property="fileLevel" />
 	</resultMap>
 
+  <select id="allCourse" resultType="_int">
+  SELECT
+  		COUNT(*)
+    FROM
+    	COURSE
+  </select>
 
   <select id="allCourseList" resultMap="courseResultSet">
  	   SELECT

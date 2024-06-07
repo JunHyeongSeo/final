@@ -198,6 +198,9 @@
     					continue;
     				}
     				
+    				if(data[i].courseNo === '3-A코스') data[i].courseNo = '3코스';
+    				if(data[i].courseNo === '15-A코스') data[i].courseNo = '15코스';
+    				
     				btn += '<button class="course-btn" id="' + data[i].courseIndex
 			 		   + '" onclick="content(this);">'
 			 		   + data[i].courseNo + '</button>';    				   
@@ -218,6 +221,9 @@
     				
     	    		const url = "resources/course/island/"+ (data.courseIndex) +".png"
 
+    	    		if(data.courseNo === '3-A코스') data.courseNo = '3코스 (A/B)'
+    	    		if(data.courseNo === '15-A코스') data.courseNo = '15코스 (A/B)'
+    	    		
     	    		content += '<div id="course-datail">'
     	    				 + '<h4>' + data.courseNo + '</h4>'
     						 + '<h5>' + data.startEnd + '</h5>'

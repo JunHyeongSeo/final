@@ -18,7 +18,7 @@ public class CourseController {
 	
 	@GetMapping("courses")
 	public ModelAndView CourseMain(ModelAndView mv) {
-		mv.addObject("list", courseService.allCourseList()).setViewName("course/courseMain");
+		mv.addObject("list", courseService.allCourseList()).setViewName("course/courseMain");		
 		return mv;
 	}
 	
