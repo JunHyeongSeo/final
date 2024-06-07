@@ -344,6 +344,7 @@
 		                            </c:choose>
 		                            <td class="hdmy-table_small">${companion.userName}</td>
 		                            <td class="hdmy-table_small">${companion.companionNum} / ${companion.companionPeople}</td>
+		                            
 		                            <c:choose>
 		                            	<c:when test="${companion.nowStatus == '마감' or companion.companionPeople eq companion.companionNum}">
 		                            		<td class="hdmy-table_status1">마감</td>
@@ -352,6 +353,8 @@
 		                            		<td class="hdmy-table_status2">모집 중</td>
 		                            	</c:otherwise>
 		                            </c:choose>
+		                            
+		                            
 		                            <td class="hdmy-table_small">${ companion.count}</td>
 		                        </tr>
 	                        </c:forEach>
@@ -411,9 +414,6 @@
 
 	<jsp:include page="../common/footer.jsp"/>
 	
-
-	
-	
 	<script>
     	$(function(){
     		$('.table-hover > tbody > tr').click(function(){
@@ -426,7 +426,7 @@
 		}
 		
 		$(() => {
-		    $(document).on('click', '.sortCompanion', () => {
+		    $(document).on('click', '.sortCompanion', function(){
 		        $.ajax({
 		            url: 'companions',
 		            type: 'get',
@@ -439,7 +439,7 @@
 		                    value += '<tr>'
 		                           + '<td class="hdmy-table_mid">' + result[i].companionDate +'</td>'
 		                           + '<td class="hdmy-table_small">' + result[i].courseName +'</td>'
-		                           + '<td>' + result[i].companionTitle +'</td>'
+		                           + '<td>' + result[i].companionTitle + '<a class="commentCount">[' + result[i].replyCount + ']</a></td>'
 		                           + '<td class="hdmy-table_small">' + result[i].userName +'</td>'
 		                           + '<td class="hdmy-table_small">' + result[i].companionNum + '/' + result[i].companionPeople + '</td>'
 		                           + '<td class="hdmy-table_status2"> 모집중 </td>'

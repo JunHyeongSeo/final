@@ -116,14 +116,12 @@ public class ReviewController {
 	    if (reviewNo > 0) { 
 	        List<MultipartFile> allFiles = new ArrayList<MultipartFile>();
 	        
-	        // 첫 번째 파일들의 파일 레벨은 1
 	        for (MultipartFile file : upfiles1) {
 	            if (!file.isEmpty()) {
 	                allFiles.add(file);
 	            }
 	        }
 	        
-	        // 두 번째 파일들의 파일 레벨은 2
 	        for (MultipartFile file : upfiles2) {
 	            if (!file.isEmpty()) {
 	                allFiles.add(file);
@@ -143,15 +141,14 @@ public class ReviewController {
 	            
 	            // 파일 레벨 설정
 	            if (i < upfiles1.length) {
-	                reviewImg.setFileLevel(1); // 첫 번째 파일들의 파일 레벨은 1
+	                reviewImg.setFileLevel(1); 
 	            } else {
-	                reviewImg.setFileLevel(2); // 두 번째 파일들의 파일 레벨은 2
+	                reviewImg.setFileLevel(2);
 	            }
 	            
 	            reviewService.insertImg(reviewImg);
 	        }
 	        
-
 	        session.setAttribute("alertMsg", "게시글 작성 성공!");
 	        return "redirect:review";
 	    } else { 

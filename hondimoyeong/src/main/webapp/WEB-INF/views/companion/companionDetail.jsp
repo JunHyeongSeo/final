@@ -105,6 +105,18 @@
         font-size: 20px;
         font-weight: bold;
     }
+    
+    .none_btn{
+        width: 180px;
+        height: 72px;
+        border: none;
+        background-color: gray;
+        border-radius: 30px;
+        margin-left: 10px;
+        color: white;
+        font-size: 20px;
+        font-weight: bold;
+    }
 
     /* 본문 */
     .detail_content{
@@ -149,6 +161,19 @@
     	float: left;
     	margin-right: 20px;
     }
+    
+    .noUser{
+       	width: 1090px;
+    	height: 90px;
+    	resize: none;
+    	border: 1px solid lightgray;
+    	border-radius: 10px;
+    	padding: 10px;
+    	outline: none;
+    	float: left;
+    	margin-right: 20px;
+    	color: #777777;
+    }
 
     .comment_btn{
     	width:90px;
@@ -157,6 +182,19 @@
     	line-height: 85px;
     	float:left;
     	background-color: #FF9843;
+    	color: #fff;
+    	border-radius: 10px;
+    	font-weight: bold;
+    	border: none;
+    }
+    
+    .noBtn{
+    	width:90px;
+    	height: 90px;
+    	text-align: center;
+    	line-height: 85px;
+    	float:left;
+    	background-color: gray;
     	color: #fff;
     	border-radius: 10px;
     	font-weight: bold;
@@ -232,6 +270,7 @@
         line-height: 35px;
         text-decoration: none;
     }
+   
     
     .hdmy_detail_btn:hover{
     	text-decoration: none;
@@ -274,12 +313,15 @@
 	            <c:choose>
 	            	<c:when test="${companion.companionNum ge companion.companionPeople or companion.nowStatus == '마감'}">
 	                	<div class="detail_right_btn">
-	                		<button class="detail_btn" disabled style="background-color: grey;">마감</button>
+	                		<button class="detail_btn none_btn" disabled>마감</button>
 	                	</div>
 	            	</c:when>
 	            	<c:otherwise>
 		                <div class="detail_right_btn">
+		                
+		                
 		                <c:choose>
+		                
 		                	<c:when test="${empty loginUser}">
 			                	<button class="detail_btn" onclick="noConnect();">신청하기</button>
 		                	</c:when>
@@ -288,11 +330,13 @@
 			                	<button class="detail_btn" onclick="userNoAlert();">신청하기</button>
 		                	</c:when>
 		                	
-		                	
 		                	<c:otherwise>
 			                	<button class="detail_btn" onclick="connect();">신청하기</button>
 		                	</c:otherwise>
+		                	
 		                </c:choose>
+		                
+		                
 		                </div>
 	            	</c:otherwise>
 	            </c:choose>
@@ -311,8 +355,8 @@
 			<div class="comment_write">
 			<c:choose>
 				<c:when test="${ empty loginUser }">
-					<textarea class="commentContent" name="commentContent" style="color: #777;" readonly>로그인 후 작성 가능합니다.</textarea>
-					<button class="comment_btn" onclick="addComment();" disabled>등록</button> 	
+					<textarea class="commentContent noUser" name="commentContent" readonly>로그인 후 작성 가능합니다.</textarea>
+					<button class="comment_btn noBtn" onclick="addComment();" disabled>등록</button> 	
 				</c:when>
 				<c:otherwise>
 					<textarea class="commentContent" name="commentContent"></textarea>
@@ -330,9 +374,12 @@
             <a class="hdmy_detail_btn detailBtn">목록</a>
             <c:if test="${sessionScope.loginUser.userNo == companion.userNo}">
             	<c:choose>
+            	
 	            	<c:when test="${companion.companionNum ge companion.companionPeople or companion.nowStatus == '마감'}">
 		            	<button class="hdmy_detail_btn" onclick="endAlert();">수정</button>
 	            	</c:when>
+	            	
+	            	
 	            	<c:otherwise>
 		            	<a class="hdmy_detail_btn" onclick="postSubmit(0);">수정</a>
 		            </c:otherwise>
@@ -356,6 +403,14 @@
 		location.href='${path}/login';
 	}
 	
+	function userNoAlert(){
+		alert('본인의 신청글엔 신청이 불가능 합니다.');
+	}
+	
+	function endAlert(){
+		alert('마감 된 모집글은 수정이 불가능 합니다.')
+	}
+	
 	// 목록, 수정, 삭제
 	$(function(){
 		$('.detailBtn').click(function(){
@@ -363,9 +418,7 @@
 		});
 	});
 	
-	function endAlert(){
-		alert('마감 된 모집글은 수정이 불가능 합니다.')
-	}
+
 	
 	function postSubmit(num){
 		if(num == 0){
@@ -447,10 +500,7 @@
 			}
 		})
 	};
-	
-	function userNoAlert(){
-		alert('본인의 신청글엔 신청이 불가능 합니다.');
-	}
+
 	
 	</script>
 

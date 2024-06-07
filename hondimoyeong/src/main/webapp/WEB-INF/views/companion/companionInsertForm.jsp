@@ -138,6 +138,7 @@
 		                                		${ c.courseNo }
 		                                	</option>
 		                                </c:forEach>
+		                                
 		                                </select>
 		                            </td>
 								</tr>
