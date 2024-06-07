@@ -28,8 +28,8 @@ public class KakaoPayController {
 	@Autowired
 	KakaoPayService kakaoPay;
 	
-	@Autowired
-	private  ReserveService reserveService;
+	
+	private final ReserveService reserveService;
 	
 	private KakaoPayVo kakaopayVo;
 	

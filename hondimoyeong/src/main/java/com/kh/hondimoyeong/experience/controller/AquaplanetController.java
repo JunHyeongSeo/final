@@ -14,20 +14,24 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.kh.hondimoyeong.course.model.repository.CourseMapper;
 import com.kh.hondimoyeong.experience.model.service.ReserveService;
 import com.kh.hondimoyeong.experience.model.vo.Experience;
 import com.kh.hondimoyeong.experience.model.vo.Exreview;
 import com.kh.hondimoyeong.member.model.vo.Member;
 
+import lombok.RequiredArgsConstructor;
+
 @PropertySources(@PropertySource("classpath:config.properties"))
 @Controller
+@RequiredArgsConstructor
 public class AquaplanetController {
 	
-	@Autowired
-	private  ReserveService reserveService;
 	
-	@Autowired
-	private Environment env;
+	private final ReserveService reserveService;
+	
+	
+	private final Environment env;
 	
 	
 	

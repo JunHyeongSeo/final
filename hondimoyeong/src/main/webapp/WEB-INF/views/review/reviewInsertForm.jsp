@@ -186,6 +186,7 @@
 		                                </select>
 		                            </td>
 								</tr>
+								
 		                        <tr>
 		                            <th>* 별점</th>
 		                            <td>
@@ -203,6 +204,7 @@
 		                                </fieldset>
 		                            </td>
 		                        </tr>
+		                        
 		                        <tr>
 									<th>* 제목</th>
 									<td><input type="text" name="reviewTitle" class="title_inp" required/></td>

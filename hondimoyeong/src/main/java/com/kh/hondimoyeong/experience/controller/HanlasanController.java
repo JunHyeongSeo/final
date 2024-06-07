@@ -12,20 +12,24 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.kh.hondimoyeong.experience.model.dao.ReserveMapper;
 import com.kh.hondimoyeong.experience.model.service.ReserveService;
 import com.kh.hondimoyeong.experience.model.vo.Experience;
 import com.kh.hondimoyeong.experience.model.vo.Exreview;
 import com.kh.hondimoyeong.member.model.vo.Member;
 import com.kh.hondimoyeong.review.model.vo.Review;
 
+import lombok.RequiredArgsConstructor;
+
 @Controller
+@RequiredArgsConstructor
 public class HanlasanController {
 	
-	@Autowired
-	private  ReserveService reserveService;
 	
-	@Autowired
-	private Environment env;
+	private final ReserveService reserveService;
+	
+	
+	private final Environment env;
 	
 	@RequestMapping("hanlasan")
 	public String hanlasan(HttpSession session){
