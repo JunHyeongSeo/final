@@ -10,7 +10,7 @@
 
 	#innerOuter{
 		width : 1000px;
-		height : 1300px;
+		height : 1400px;
 		margin : auto;
 		margin-bottom: 50px;
 	}
@@ -95,7 +95,7 @@
 
     }
 
-    #course-datail{
+    .course-detail{
         width: 380px;
         height: 180px;
         background-color: rgba(255, 255, 255, 0.606);
@@ -224,7 +224,7 @@
     	    		if(data.courseNo === '3-A코스') data.courseNo = '3코스 (A/B)'
     	    		if(data.courseNo === '15-A코스') data.courseNo = '15코스 (A/B)'
     	    		
-    	    		content += '<div id="course-datail">'
+    	    		content += '<div class="course-detail" id="'+ data.courseIndex +'" onclick="detailPage(this);">'
     	    				 + '<h4>' + data.courseNo + '</h4>'
     						 + '<h5>' + data.startEnd + '</h5>'
     						 + '<h5>' + data.takeTime + '</h5>'
@@ -235,9 +235,16 @@
     			}
 
     		})
-
     	}
-
+    	
+    	
+    	function detailPage(obj){
+    		
+    		//console.log($(obj).attr('id'));
+    		location.href="course?courseIndex="+$(obj).attr('id');
+    		
+    	}
+    	
     </script>
 
 	
