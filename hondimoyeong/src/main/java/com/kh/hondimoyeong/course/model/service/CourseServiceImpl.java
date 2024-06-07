@@ -61,6 +61,11 @@ public class CourseServiceImpl implements CourseService{
 	public List<Course> userCourse(int userNo) {
 		return courseMapper.userCourse(userNo);
 	}
+
+	@Override
+	public int allCourse() {
+		return courseMapper.allCourse();
+	}
 	
 	
 	

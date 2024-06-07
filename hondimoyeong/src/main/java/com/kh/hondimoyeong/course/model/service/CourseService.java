@@ -6,6 +6,8 @@ import com.kh.hondimoyeong.course.model.vo.Course;
 import com.kh.hondimoyeong.course.model.vo.CourseFile;
 
 public interface CourseService {
+	
+	int allCourse();
 
 	List<Course> allCourseList();
 	
