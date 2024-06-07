@@ -101,15 +101,6 @@
 		            <div class="menu">
 		                <a href="#">게시글</a>
 		            </div>
-		            <div class="menu">
-		                <a href="#">1</a>
-		            </div>
-		            <div class="menu">
-		                <a href="#">2</a>
-		            </div>
-		            <div class="menu">
-		                <a href="#">3</a>
-		            </div>
 		        </div>
 		    </div>
 		</c:otherwise>

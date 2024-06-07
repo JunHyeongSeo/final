@@ -8,70 +8,75 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.kh.hondimoyeong.common.model.vo.PageInfo;
-import com.kh.hondimoyeong.experience.model.dao.ReserveRepository;
+import com.kh.hondimoyeong.experience.model.dao.ReserveMapper;
 import com.kh.hondimoyeong.experience.model.vo.Experience;
 import com.kh.hondimoyeong.experience.model.vo.Exreview;
 
+import lombok.RequiredArgsConstructor;
+
 @Service
+@RequiredArgsConstructor
 public class ReserveServiceImpl  implements ReserveService{
 	
-	@Autowired
-	private SqlSessionTemplate sqlSession;
+//	@Autowired
+//	private SqlSessionTemplate sqlSession;
 	
-	@Autowired
-	private ReserveRepository reserveRepository;
+//	@Autowired
+//	private reserveMapper reserveMapper;
+//	
+	private final ReserveMapper reserveMapper;
 
 	@Override
 	public int insertReserve(Experience experience) {
-		return reserveRepository.insertReserve(sqlSession, experience);
+		return reserveMapper.insertReserve( experience);
 	}
 	
 	@Override
 	public Experience findEx() {
 		// TODO Auto-generated method stub
-		return reserveRepository.findEx(sqlSession);
+		return reserveMapper.findEx();
 	}
 
 	@Override
 	public int insertHan(Experience experience) {
-		return reserveRepository.insertHan(sqlSession, experience);
+		return reserveMapper.insertHan(experience);
 	}
 
 	@Override
 	public List<Experience> findAll() {
-		return reserveRepository.findAll(sqlSession);
+		return reserveMapper.findAll();
 	}
 
 	@Override
 	public int selectListCount() {
-		return reserveRepository.selectListCount(sqlSession);
+		return reserveMapper.selectListCount();
 	}
 
 	@Override
 	public List<Experience> selectList(PageInfo pi) {
 		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
 		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
-		return reserveRepository.selectList(sqlSession, rowBounds);
+		return reserveMapper.selectList(rowBounds);
 	}
 
 	@Override
 	public Experience selectexperience(int experienceNo) {
-		return reserveRepository.selectexperience(sqlSession, experienceNo);
+		return reserveMapper.selectexperience(experienceNo);
 	}
 
 	@Override
 	public List<Experience> excheck(int userNo) {
-		return reserveRepository.excheck(sqlSession, userNo);
+		return reserveMapper.excheck(userNo);
 	}
 
 	@Override
 	public int insertreview(Exreview Exreview) {
-		return reserveRepository.insertreview(sqlSession, Exreview);
+		return reserveMapper.insertreview(Exreview);
 	}
 
 	@Override
 	public List<Exreview> review(Exreview exreview) {
-		return reserveRepository.review(sqlSession, exreview);
+		return reserveMapper.review(exreview);
 	}
 
 	

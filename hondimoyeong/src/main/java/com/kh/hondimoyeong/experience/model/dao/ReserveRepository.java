@@ -13,6 +13,7 @@ import com.kh.hondimoyeong.experience.model.vo.Exreview;
 public class ReserveRepository {
 	
 	
+	/*
 	public int insertReserve(SqlSessionTemplate sqlSession, Experience experience) {
 		return sqlSession.insert("experienceMapper.insertReserve", experience);
 	}
@@ -56,5 +57,5 @@ public class ReserveRepository {
 	public List<Exreview> review(SqlSessionTemplate sqlSession,Exreview exreview){
 		return sqlSession.selectList("experienceMapper.review", exreview);
 	}
-	
+	*/
 }
