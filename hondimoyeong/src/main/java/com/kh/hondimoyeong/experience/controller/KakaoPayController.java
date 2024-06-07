@@ -25,11 +25,11 @@ import lombok.extern.java.Log;
 @Log
 public class KakaoPayController {
 	
-	@Autowired
-	KakaoPayService kakaoPay;
 	
-	@Autowired
-	private  ReserveService reserveService;
+	private final KakaoPayService kakaoPay;
+	
+	
+	private final ReserveService reserveService;
 	
 	private KakaoPayVo kakaopayVo;
 	
@@ -49,7 +49,7 @@ public class KakaoPayController {
 		// INSERT
         reserveService.insertReserve(experience);
         
-        //SESLECT
+        // SELECT
         Experience ex = reserveService.findEx();
         
 		model.addAttribute("Experience", ex);

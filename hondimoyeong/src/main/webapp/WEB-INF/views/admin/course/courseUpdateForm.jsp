@@ -99,7 +99,12 @@
 	                <td class="infomation">${course.takeTime}</td>
 	                <td class="part" rowspan="2">스탬프</td>
 	                <td rowspan="2" class="infomation">
-	                    <input type="file" name="stamp">
+	                <c:forEach var="file" items="${course.files}">
+                		<c:if test="${file.fileLevel eq 1 }">
+                			${file.originName }
+                		</c:if>
+                	</c:forEach>
+	                    <input type="file" name="stamp"> 
 	                </td>
 	            </tr>
 	            <tr>
@@ -116,28 +121,23 @@
 	            <tr>
 	                <td class="part">상세지도</td>
 	                <td class="infomation" colspan="5">
+	                <c:forEach var="file" items="${course.files}">
+                		<c:if test="${file.fileLevel eq 2 }">
+                			${file.originName }
+                		</c:if>
+                	</c:forEach>
 	                    <input type="file" name="detailMap">
 	                </td>
 	            </tr>
 	            <tr>
-	                <td class="part" rowspan="3">코스사진</td>
-	                <td class="part"> 사진 1 </td>
-	                <td class="infomation" colspan="4"> 
-	                	<input type="file" name="photo">
-	                </td>
-	            </tr>
-	            <tr>
-	                <td class="part"> 사진 2 </td>
-	                <td class="infomation" colspan="4"> 
-	                	<input type="file" name="photo">
-	                </td>
-	            </tr>
-	            <tr>
-	                <td class="part"> 사진 3 </td>
-	                <td class="infomation" colspan="4"> 
-	                	<input type="file" name="photo">
-	                </td>
-	            </tr>
+	                <td class="part" rowspan="4">코스사진</td>
+		            <c:forEach var="file" items="${course.files}">
+			               <c:if test="${file.fileLevel eq 3 }"> 
+			               	<tr>    
+				                <td class="infomation" colspan="4">${ file.originName }  <input type="file" name="photo"></td>
+							</tr>
+			               </c:if>
+				    </c:forEach>
 	        </table>
 
 	        <div class="btn-area">
@@ -148,8 +148,18 @@
         </form>
 
         <div class="btn-area">
-            <button>목록으로</button>
+        	<button id="back">목록으로</button>
         </div>
+        
+        <script>
+        	
+        $(() => {
+        	$('#back').click(() => {
+        		location.href="/hondimoyeong/admin/course";
+        	})
+        })
+        
+        </script>
         
     </div>
     

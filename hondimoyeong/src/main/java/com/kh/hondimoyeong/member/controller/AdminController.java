@@ -3,6 +3,7 @@ package com.kh.hondimoyeong.member.controller;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,35 +15,25 @@ import com.kh.hondimoyeong.common.model.vo.PageInfo;
 import com.kh.hondimoyeong.common.template.Pagination;
 import com.kh.hondimoyeong.experience.model.service.ReserveService;
 
+import lombok.RequiredArgsConstructor;
+
 @Controller
+@RequiredArgsConstructor
 public class AdminController {
 	
-	@Autowired
-	private ReserveService reserveService;
+	
+	private final ReserveService reserveService;
 	
 	@GetMapping(value="saleMain", produces="application/json; charset=UTF-8")
 	@ResponseBody
 	public ModelAndView saleMain(@RequestParam(value="page", defaultValue="1") 
 								  int page, HttpSession session, ModelAndView mv) {
 		
-		
-		//List<Experience> saleList =  reserveService.findAll();
-		
-		//System.out.println(saleList);
-		
 		PageInfo pi = Pagination.getPageInfo(reserveService.selectListCount(), page, 5, 10);
-		
-		
-		//System.out.println(pi);
-		
 		
 		session.setAttribute("list",reserveService.selectList(pi));
 		
-		System.out.println(reserveService.selectList(pi));
-		
 		session.setAttribute("pageInfo",pi);
-		
-		
 		
 		mv.setViewName("common/adminMain");
 		
@@ -59,8 +50,6 @@ public class AdminController {
 			mv.addObject("experienceDetail", reserveService.selectexperience(experienceNo))
 				.setViewName("common/adminMaindetail");
 			
-			System.out.println(reserveService.selectexperience(experienceNo));
-		
 		return mv;
 	}
 

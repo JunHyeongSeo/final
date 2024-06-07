@@ -111,7 +111,7 @@
 	<div id="reserve">
 		<div id="a">
 			<h1>제주입장권</h1>
-			<b>아쿠아리움 + 오션아레나 공연 + 유미의 세포들 특별전 &nbsp;&nbsp;</b><span class="discount">18%</span><br><br>
+			<b>아쿠아리움 + 오션아레나 공연 + 유미의 세포들 특별전 &nbsp;</b><span class="discount">18%</span><br><br>
 			
 			<form method="post" action="kakaoPay">
 				<input type="date" name="experienceDate" id="Date"><!-- 1 -->

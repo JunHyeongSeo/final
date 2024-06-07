@@ -96,7 +96,9 @@
 		WHERE
 		     B.USER_NO = #{userNo}
 		  AND
-		  	 P.STATUS = 'Y'    
+		  	 P.STATUS = 'Y'
+		  AND
+		  	 B.STATUS NOT IN 'W'	    
      		   
 	</select>
 	
@@ -146,22 +148,22 @@
 	
 	<select id="alram" parameterType="_int" resultType="_int">
 	SELECT
-	    COUNT(B.USER_NO)
+	      COUNT(B.USER_NO)
 	 FROM
-	     COMPANION_BRIDGE B
+	      COMPANION_BRIDGE B
 	 JOIN
 	     (SELECT
-	          COMPANION_NO,
-	          USER_NO,
-	          STATUS
-	     FROM
-	          COMPANION_BRIDGE
-	    WHERE
-	          USER_NO = #{userNo}
-	      AND
-	          STATUS = 'W') A ON (B.COMPANION_NO = A.COMPANION_NO)
+	            COMPANION_NO,
+	            USER_NO,
+	            STATUS
+	        FROM
+	            COMPANION_BRIDGE
+	       WHERE
+	            USER_NO = #{userNo}
+	         AND
+	            STATUS = 'W') A ON (B.COMPANION_NO = A.COMPANION_NO)
 	WHERE
-	     B.STATUS = 'N'
+	      B.STATUS = 'N'
 
 	</select>
 	

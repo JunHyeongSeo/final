@@ -51,7 +51,9 @@
 	padding-top:20px;
 	color:white;
 	height:100%;
+	width:50%;
 	background-color: #36f;
+	float:left;
 }
 
 #one{
@@ -77,6 +79,14 @@
 	margin-right:10px;
 	margin-top:10px;
 }	
+
+.place{
+	width:60%;
+	height:10%;
+	float:left;
+	text-align:left;
+}
+
 		
 </style>
 </head>
@@ -96,9 +106,11 @@
 				</div>
 				<div id="main2">
 					<h3>이용요금</h3><br>
-					<h4>성인    &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;45000원</h4>
-					<h4>청소년·경로 &nbsp;&nbsp;&nbsp;43000원</h4>
-					<h4>어린이    &nbsp;&nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;40000원</h4> <br>
+					
+					<div class="place"><h4>성인</h4></div><div><h4>45000원</h4></div>
+					
+					<div class="place"><h4>청소년·경로 </h4></div><h4>43000원</h4>
+					<div class="place"><h4>어린이</h4></div><h4>40000원</h4> <br>
 					<form action="aquareserve" method="get">
 						<button class="btn btn-outline-info"  style="margin-top:15px">예매하기</button>
 						<input type="hidden" name="price" id="price" value="36000">

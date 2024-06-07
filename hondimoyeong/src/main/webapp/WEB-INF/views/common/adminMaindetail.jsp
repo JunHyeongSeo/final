@@ -20,13 +20,13 @@
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 <body>
-<jsp:include page ="../common/header.jsp" />
+<jsp:include page="adminHeader.jsp"/>
 
 	<div id="all">
 	
 	
 		<h2>결제 상세 내역</h2><br>
-		<a class="btn btn-secondary" style="float:right;" href="saleMain">목록으로</a>
+		<a class="btn btn-secondary" style="float:right; height:40px;" href="saleMain">목록으로</a>
 	<table id="boardList" class="table table-hover" align="center">
 		        <thead>
 		            <tr>
