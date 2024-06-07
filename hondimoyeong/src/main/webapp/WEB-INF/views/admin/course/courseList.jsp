@@ -75,7 +75,6 @@
 			<p>최근 업데이트 시간 : ${cookie.currentTime.value }</p>
 			<a href="api/load">데이터 가져오기</a>
 		</div>
-
 		<table>
 			<thead>
 				<tr>

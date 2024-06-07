@@ -245,7 +245,6 @@
     				$('#alram-area').css('background-color', 'white');
     				$('#alram-area').css('border', 'white');
     			}
-    			
     		}
     		
     	})

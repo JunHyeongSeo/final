@@ -256,6 +256,7 @@
             </c:choose>
             
 	            <c:forEach var="board" items="${list}">
+
 	            	<div class="background-Box">
 	            	    <div class="acompany-btn">
 	            	    	<c:choose>
@@ -267,6 +268,7 @@
 	            		<div class="box2">제목 : ${board.companionTitle} </div>
 	            		<div class="box3"> ${board.courseName} 날짜 : ${board.companionDate} 인원 : ${board.companionNum}/${board.companionPeople }</div>
 	            	</div>
+	
 	            </c:forEach>
 
 	           <div id="pagingArea">

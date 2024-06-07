@@ -65,6 +65,7 @@ public class CourseApiController {
 		
 		for(int i = 0; i < jsonArray.size(); i++) {
 			JSONObject object = (JSONObject)jsonArray.get(i);		
+
 			Course course = new Course();
 			course.setCourseNo((String)object.get("코스별"));
 			course.setCourseName((String)object.get("코스명"));

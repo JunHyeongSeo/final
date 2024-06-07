@@ -149,7 +149,7 @@
         <div id="main">
             <h2>${course.courseNo }. ${course.courseName }</h2>
             <h4>${course.startEnd }</h4>
-            <h4>거리:${course.distance } / 소요시간 : ${course.takeTime }</h4>
+            <h4>거리 : ${course.distance } / 소요시간 : ${course.takeTime }</h4>
             <p>${course.content }</p>
         </div>
         <br><br>
@@ -219,8 +219,7 @@
 			url : 'courseMap',
 			data : {query : $keyword },
 			success : (data) => {
-				
-				const id = data[0].id;
+
 				const placeUrl = data[0].place_url;
 				const xMark = data[0].x;
 				const yMark = data[0].y;
