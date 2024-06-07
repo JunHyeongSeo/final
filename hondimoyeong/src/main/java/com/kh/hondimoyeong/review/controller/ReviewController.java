@@ -130,9 +130,8 @@ public class ReviewController {
 	            }
 	        }
 	        
-	        int fileLevel = 1;
-	        
-	        for (MultipartFile upfile : allFiles) {
+	        for (int i = 0; i < allFiles.size(); i++) {
+	            MultipartFile upfile = allFiles.get(i);
 	            String originalFilename = upfile.getOriginalFilename();
 	            String changeName = saveFile(upfile, session);
 	            
@@ -143,13 +142,15 @@ public class ReviewController {
 	            reviewImg.setChangeName(changeName);
 	            
 	            // 파일 레벨 설정
-	            if (allFiles.size() == upfiles2.length && fileLevel == 1) {
-	                fileLevel = 2;
-	                // 두 번째 파일이 업로드되었을 때 파일 레벨 2
+	            if (i < upfiles1.length) {
+	                reviewImg.setFileLevel(1); // 첫 번째 파일들의 파일 레벨은 1
+	            } else {
+	                reviewImg.setFileLevel(2); // 두 번째 파일들의 파일 레벨은 2
 	            }
-	            reviewImg.setFileLevel(fileLevel); // 파일 레벨 설정
+	            
 	            reviewService.insertImg(reviewImg);
 	        }
+	        
 
 	        session.setAttribute("alertMsg", "게시글 작성 성공!");
 	        return "redirect:review";

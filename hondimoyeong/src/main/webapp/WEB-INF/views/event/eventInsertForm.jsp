@@ -166,7 +166,7 @@
 		</c:when>
 		<c:otherwise>
 		    <div id="container">
-		        <div class="notice_insert_title"><span>이벤트 작성</span></div>
+		        <div class="notice_insert_title"><span>축제/이벤트 글 작성</span></div>
 		
 		        <div class="insert_box">
 		            <form action="${path}/event/insert" method="post" id="myform" enctype="multipart/form-data">

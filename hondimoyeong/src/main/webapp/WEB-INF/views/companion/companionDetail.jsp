@@ -330,7 +330,7 @@
             <a class="hdmy_detail_btn detailBtn">목록</a>
             <c:if test="${sessionScope.loginUser.userNo == companion.userNo}">
             	<c:choose>
-	            	<c:when test="${companion.nowStatus == '마감'}">
+	            	<c:when test="${companion.companionNum ge companion.companionPeople or companion.nowStatus == '마감'}">
 		            	<button class="hdmy_detail_btn" onclick="endAlert();">수정</button>
 	            	</c:when>
 	            	<c:otherwise>
