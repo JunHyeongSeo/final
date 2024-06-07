@@ -31,8 +31,7 @@ import lombok.extern.java.Log;
 
 @Service
 @RequiredArgsConstructor
-@Transactional
-@CrossOrigin("*")
+
 @Log
 public class KakaoPayService {
     private static final String Host = "https://open-api.kakaopay.com/online/v1/payment/ready";
@@ -52,8 +51,6 @@ public class KakaoPayService {
         // Server Request Header : 서버 요청 헤더
         HttpHeaders headers = new HttpHeaders();
         headers.add("Authorization", "SECRET_KEY " + env.getProperty("Kakao_admin_key_pay")); // 어드민 키
-        //headers.add("Accept", "application/json");
-        //headers.add("Content-type", "application/x-www-form-urlencoded;charset=utf-8");
         headers.add("Content-type", "application/json");
 
 
@@ -77,18 +74,12 @@ public class KakaoPayService {
         try {
            reserve = restTemplate.postForObject(new URI(Host), body, Reserve.class);
 
-           //HttpEntity<Reserve> reserve = restTemplate.exchange(new URI(Host + "/online/v1/payment/ready"), HttpMethod.POST, body, Reserve.class);
-           
            log.info(""+ reserve);
-          // System.out.println(reserve);
            
            session.setAttribute("experience", ex);
            
-            
            return reserve.getNext_redirect_pc_url();
         		   
-            
-
         } catch (RestClientException e) {
             e.printStackTrace();
         } catch (URISyntaxException e) {
@@ -108,8 +99,6 @@ public class KakaoPayService {
          // Server Request Header : 서버 요청 헤더
          HttpHeaders headerss = new HttpHeaders();
          headerss.add("Authorization", "SECRET_KEY " + env.getProperty("Kakao_admin_key_pay")); // 어드민 키
-         //headers.add("Accept", "application/json");
-         //headers.add("Content-type", "application/x-www-form-urlencoded;charset=utf-8");
          headerss.add("Content-type", "application/json");
 
 
@@ -117,21 +106,12 @@ public class KakaoPayService {
          Map<String, String> paramss = new HashMap<String, String>();
 
          paramss.put("cid", "TC0ONETIME"); // 가맹점 코드 - 테스트용
-         System.out.println(reserve);
          paramss.put("tid", reserve.getTid());
          
         System.out.println(experience);
-         
-         //paramss.put("partner_order_id", String.valueOf(((Experience)session.getAttribute("experince")).getExperienceNo())); // 주문 번호
-         //paramss.put("partner_user_id",  ((Experience)session.getAttribute("experince")).getUserId()); // 회원 아이디
          paramss.put("partner_order_id", String.valueOf(experience.getExperienceNo()));
          paramss.put("partner_user_id", experience.getUserId());
          paramss.put("pg_token", pg_token);
-//         params.put("total_amount", "20000"); // 상품 가격
-//         params.put("tax_free_amount", "100"); // 상품 비과세 금액
-//         params.put("approval_url", "http://localhost:8024/success"); // 성공시 url
-//         params.put("fail_url", "http://localhost:8024/fail"); // 실패시 url
-//         params.put("cancel_url", "http://localhost:8024/cancel");
 
          // 헤더와 바디 붙이기
          HttpEntity<Map<String, String>> boddy = new HttpEntity<Map<String, String>>(paramss, headerss);
@@ -146,8 +126,6 @@ public class KakaoPayService {
             System.out.println("kakaopayVo" + kakaopayVo);
              
             return kakaopayVo;
-            
-             
 
          } catch (RestClientException e) {
              e.printStackTrace();
